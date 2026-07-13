@@ -189,7 +189,7 @@ function DevisPage() {
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {DIAGNOSTICS.map((d) => (
                   <label
-                    key={d.slug}
+                    key={`${d.slug}-${preselected ? "ready" : "init"}`}
                     className="flex cursor-pointer items-start gap-3 rounded-sm border border-gold/20 bg-background p-4 text-sm transition-colors hover:border-gold/60"
                   >
                     <input
