@@ -1,76 +1,74 @@
-# Plan : Site DIAG VERITAS
+## Simulateur "Quels diagnostics sont obligatoires ?"
 
-Site vitrine haut de gamme, esthétique noir & or, pour une entreprise de diagnostics immobiliers basée à Livry-Gargan (93) intervenant en Île-de-France et dans l'Oise.
+### Nouvelle route
+- `src/routes/simulateur.tsx` — page dédiée avec `head()` SEO ("Simulateur diagnostics obligatoires — DIAG VERITAS", description ciblant "diagnostics obligatoires vente location Île-de-France").
+- Ajout du lien "Simulateur" dans `site-header.tsx` (nav desktop + menu mobile) et éventuellement footer.
 
-## Identité & design
+### Composant simulateur (`src/components/simulator.tsx`)
+Un wizard multi-étapes, une question par écran, dans un carte noir/or cohérente avec le design existant (bordures `gold/20`, `font-display` pour titres, boutons dorés).
 
-- Palette : noir profond (#0a0a0a), anthracite, or (#c9a84c, #f0d78c), blanc cassé pour le texte
-- Typographie : Cormorant Garamond (titres, serif élégant) + Inter (corps, lisibilité)
-- Ambiance : premium, éditorial, sérieux ; larges espaces, fines lignes dorées, animations discrètes au scroll
-- Composants : shadcn/ui personnalisés, boutons dorés avec dégradé subtil, cartes noires avec bordure or à 1px
-- 100% responsive mobile-first, sticky header avec CTA « Appeler maintenant » (tel:+33672297362) toujours visible
-- Bouton flottant d'appel sur mobile
+**Étapes (7 questions)** :
+1. Type d'opération — Vente / Location
+2. Type de bien — Appartement / Maison
+3. Année de construction — input `number` (validation 1800–année courante)
+4. Copropriété — Oui / Non (auto-skip et forcé à "Oui" si Appartement pour simplifier ? → non, on garde la question pour maison en copro)
+5. Installation électrique > 15 ans — Oui / Non / Je ne sais pas
+6. Installation gaz > 15 ans — Oui / Non / Pas de gaz
+7. Commune sous arrêté termites — Oui / Non / Je ne sais pas (avec petit lien info)
 
-## Pages (routes TanStack Start)
+**UI** :
+- Barre de progression dorée (`x / 7`)
+- Boutons "Précédent" / "Suivant"
+- Grandes cartes cliquables pour les choix binaires
+- Animation de transition douce (opacity/translate CSS, pas de librairie ajoutée)
+- Entièrement responsive (grid 1 col mobile, 2 col desktop pour les choix)
+- Accessibilité : `role="radiogroup"`, labels, focus visible
 
-```
-/                    Accueil
-/diagnostics         Vue d'ensemble + grille des 9 diagnostics
-/diagnostics/$slug   Fiche détaillée par diagnostic (dpe, amiante, plomb, electricite, gaz, termites, erp, loi-boutin, loi-carrez)
-/tarifs              Grille « à partir de »
-/a-propos            Entreprise, certifications, assurances, Bureau Veritas
-/contact             Coordonnées + iframe Google Maps + formulaire court
-/devis               Formulaire complet de demande de devis
-```
+### Moteur de règles (`src/lib/simulator-logic.ts`)
+Fonction pure `computeDiagnostics(answers)` retournant la liste des slugs de `DIAGNOSTICS` requis + raison courte pour chaque :
+- DPE — toujours
+- ERP — toujours
+- CREP plomb — si `année < 1949`
+- Amiante — si `année < 1997` (approximation permis avant 01/07/1997)
+- Électricité — si `elec > 15 ans` **OU** si `année de construction ≤ année courante − 15` et réponse "je ne sais pas"
+- Gaz — même logique si "je ne sais pas", ignoré si "pas de gaz"
+- Loi Boutin — si location
+- Loi Carrez — si vente **ET** copropriété
+- Termites — si arrêté = Oui (si "je ne sais pas" → afficher en "à vérifier")
 
-Chaque route a son propre `head()` (title, description, og:title, og:description, canonical relatif) avec mots-clés SEO ciblés.
+Chaque diagnostic renvoyé pointe vers sa fiche `/diagnostics/$slug` (lien depuis les cartes de résultat).
 
-## Contenu clé
+### Écran de résultat
+- Titre "Vos diagnostics obligatoires" + sous-titre récap ("Vente · Appartement · 1965 · copropriété…")
+- Grille de cartes reprenant le style de la home (icône Lucide, nom, prix "à partir de X€", lien fiche)
+- Section "À vérifier" séparée pour les cas incertains (termites/élec inconnus)
+- Encart d'avertissement doré avec le texte demandé :
+  > « Ce résultat est fourni à titre indicatif. Les obligations peuvent varier selon les caractéristiques du bien et la réglementation en vigueur. Contactez DIAG VERITAS pour une vérification gratuite et un devis personnalisé. »
+- Deux CTA : **"Demander un devis"** (Link vers `/devis` avec query params `?diagnostics=dpe,amiante,...` pré-remplissant le formulaire) + "Appeler maintenant" (tel:)
+- Bouton "Recommencer le simulateur"
 
-**Accueil**
-- Hero : accroche « Diagnostics immobiliers certifiés en Île-de-France & Oise », sous-titre, 2 CTA (Devis / Appeler), badge certifications
-- Bandeau logos : Bureau Veritas, certifications, assurances
-- Section « Nos diagnostics » : grille 3×3 des 9 prestations avec icône dorée
-- Section « Pourquoi DIAG VERITAS » : certifié, assuré, rapide, tarifs transparents
-- Zones d'intervention (93, IDF, Oise) avec villes clés dont Livry-Gargan
-- Avis clients (carrousel)
-- CTA final devis
+### Pré-remplissage de `/devis`
+Petite mise à jour de `src/routes/devis.tsx` pour lire `?diagnostics=` et cocher automatiquement les prestations correspondantes (si le formulaire actuel ne gère pas la sélection multiple, on ajoute simplement un pré-message dans le champ "message" listant les diagnostics identifiés — approche moins intrusive).
 
-**Diagnostics** : page index + 9 fiches détaillées (à quoi ça sert, obligation légale, durée validité, prix indicatif, CTA devis)
+### Intégration Accueil
+Dans `src/routes/index.tsx` :
+- Nouvel encart entre la section "Diagnostics" et "Pourquoi nous choisir", format bandeau horizontal doré :
+  - Titre "Pas sûr des diagnostics obligatoires pour votre bien ?"
+  - Bouton **"Trouver mes diagnostics obligatoires"** → `/simulateur`
+- Ajout d'un CTA secondaire discret dans le hero (petit lien sous les boutons).
 
-**Tarifs** : tableau prix « à partir de » par prestation + formules (vente/location)
+### État & tech
+- État local `useState` (aucun backend, aucun stockage), un seul composant client.
+- Pas de nouvelles dépendances.
+- Icônes Lucide déjà présentes.
+- Tokens `gold`, `gold-gradient-text`, `shadow-gold` déjà définis dans `styles.css`.
 
-**À propos** : histoire, valeurs, équipe, certifications COFRAC/Bureau Veritas, assurance RC Pro (placeholders à remplir), zones d'intervention
+### SEO
+- `head()` avec title/description/og
+- JSON-LD `WebApplication` léger pointant vers le simulateur
+- Ajout de `/simulateur` au `sitemap.xml`
 
-**Contact** : téléphone cliquable, email, adresse (14 rue Eugène Massé, 93190 Livry-Gargan), horaires, iframe Google Maps centrée sur l'adresse, mini-formulaire
-
-**Devis** : formulaire complet avec validation Zod (nom, email, téléphone, type de bien, surface, adresse, diagnostics souhaités checkboxes, message). Envoi via `mailto:` pré-rempli vers contact.diagveritas@gmail.com (pas de backend, pas de secrets nécessaires). Message de confirmation clair.
-
-## SEO
-
-- `<title>` uniques par page ciblant : « diagnostic immobilier Livry-Gargan », « DPE Seine-Saint-Denis », « diagnostic immobilier Oise », « diagnostic immobilier Île-de-France »
-- Meta description spécifique par page
-- Un `<h1>` par page, hiérarchie sémantique
-- JSON-LD `LocalBusiness` sur l'accueil (nom, adresse, téléphone, zone desservie, horaires)
-- JSON-LD `Service` sur chaque fiche diagnostic
-- `og:image` : image hero générée pour l'accueil uniquement (route feuille)
-- `sitemap.xml` via route serveur listant toutes les pages
-- `robots.txt` autorisant tout
-- Images optimisées avec `alt` descriptifs
-- Liens internes entre fiches diagnostics et devis
-
-## Détails techniques
-
-- TanStack Start + Tailwind v4 + shadcn/ui existant
-- Tokens design (noir/or, radius, ombres dorées) définis dans `src/styles.css` via `@theme inline`
-- Polices chargées via `<link>` Google Fonts dans `__root.tsx`
-- Formulaires : `react-hook-form` + `zod` (déjà présents dans shadcn)
-- Icônes : lucide-react
-- Animations légères CSS/tailwind (fade-in au scroll via `IntersectionObserver` custom)
-- Aucune dépendance backend : formulaires ouvrent le client mail de l'utilisateur (rapide à mettre en place, aucun secret). Migration possible plus tard vers Lovable Cloud si souhaité.
-- 1 image hero générée (façade immeuble haussmannien / clé dorée, ambiance premium)
-- Logo Bureau Veritas : placeholder texte stylisé (le vrai logo nécessite l'accord de BV)
-
-## Livraison
-
-Un premier passage complet du site, puis itérations selon vos retours (contenu réel, photos, prix exacts, avis, logos officiels).
+### Livraison
+Un seul batch d'édits :
+- création `simulator-logic.ts`, `simulator.tsx`, `routes/simulateur.tsx`
+- édition `index.tsx`, `site-header.tsx`, `sitemap[.]xml.ts`, éventuellement `devis.tsx`
