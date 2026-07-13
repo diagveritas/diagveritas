@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Send, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
@@ -40,6 +40,24 @@ const schema = z.object({
 function DevisPage() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [preselected, setPreselected] = useState<Set<string> | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      setPreselected(new Set());
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get("diagnostics");
+    const slugs = raw ? raw.split(",").map((s) => s.trim()).filter(Boolean) : [];
+    setPreselected(
+      new Set(
+        DIAGNOSTICS.filter((d) => slugs.includes(d.slug)).map((d) =>
+          d.name.split("—")[0].trim(),
+        ),
+      ),
+    );
+  }, []);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -171,13 +189,14 @@ function DevisPage() {
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {DIAGNOSTICS.map((d) => (
                   <label
-                    key={d.slug}
+                    key={`${d.slug}-${preselected ? "ready" : "init"}`}
                     className="flex cursor-pointer items-start gap-3 rounded-sm border border-gold/20 bg-background p-4 text-sm transition-colors hover:border-gold/60"
                   >
                     <input
                       type="checkbox"
                       name="diagnostics"
                       value={d.name.split("—")[0].trim()}
+                      defaultChecked={preselected?.has(d.name.split("—")[0].trim()) ?? false}
                       className="mt-0.5 h-4 w-4 accent-[var(--gold)]"
                     />
                     <span className="text-foreground/90">{d.name.split("—")[0].trim()}</span>
