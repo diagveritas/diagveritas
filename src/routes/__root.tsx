@@ -80,22 +80,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DIAG VERITAS — Diagnostics immobiliers en Île-de-France & Oise" },
+      { title: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS" },
       {
         name: "description",
         content:
-          "Diagnostics immobiliers certifiés à Livry-Gargan (93), en Seine-Saint-Denis, Île-de-France et Oise : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin et Loi Carrez.",
+          "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit.",
       },
       { name: "author", content: "DIAG VERITAS" },
-      { property: "og:title", content: "DIAG VERITAS — Diagnostics immobiliers certifiés" },
+      { property: "og:title", content: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS" },
       {
         property: "og:description",
         content:
-          "Diagnostics immobiliers rapides et certifiés en Île-de-France et dans l'Oise. Devis gratuit sous 24h.",
+          "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit.",
       },
       { property: "og:site_name", content: "DIAG VERITAS" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS" },
+      { name: "twitter:description", content: "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Fn9TM3HyYPaZr71XAIETM0iPwRQ2/social-images/social-1783969386076-file_00000000d61871fdac69d623da5a6388.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Fn9TM3HyYPaZr71XAIETM0iPwRQ2/social-images/social-1783969386076-file_00000000d61871fdac69d623da5a6388.webp" },
     ],
     links: [
       {

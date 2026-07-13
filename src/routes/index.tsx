@@ -18,12 +18,12 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Diagnostic immobilier en Île-de-France & Oise — DIAG VERITAS",
+        content: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS",
       },
       {
         property: "og:description",
         content:
-          "Diagnostiqueur immobilier certifié à Livry-Gargan. Interventions rapides en Seine-Saint-Denis, Île-de-France et Oise.",
+          "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit.",
       },
       { property: "og:url", content: "/" },
     ],
