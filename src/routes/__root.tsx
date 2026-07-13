@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { MobileCallButton } from "@/components/mobile-call";
 
 function NotFoundComponent() {
   return (
@@ -77,14 +80,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "DIAG VERITAS — Diagnostics immobiliers en Île-de-France & Oise" },
+      {
+        name: "description",
+        content:
+          "Diagnostics immobiliers certifiés à Livry-Gargan (93), en Seine-Saint-Denis, Île-de-France et Oise : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin et Loi Carrez.",
+      },
+      { name: "author", content: "DIAG VERITAS" },
+      { property: "og:title", content: "DIAG VERITAS — Diagnostics immobiliers certifiés" },
+      {
+        property: "og:description",
+        content:
+          "Diagnostics immobiliers rapides et certifiés en Île-de-France et dans l'Oise. Devis gratuit sous 24h.",
+      },
+      { property: "og:site_name", content: "DIAG VERITAS" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +103,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "DIAG VERITAS",
+          description:
+            "Diagnostics immobiliers certifiés en Île-de-France et dans l'Oise : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez.",
+          telephone: "+33672297362",
+          email: "contact.diagveritas@gmail.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "14 rue Eugène Massé",
+            postalCode: "93190",
+            addressLocality: "Livry-Gargan",
+            addressRegion: "Île-de-France",
+            addressCountry: "FR",
+          },
+          areaServed: [
+            { "@type": "AdministrativeArea", name: "Seine-Saint-Denis" },
+            { "@type": "AdministrativeArea", name: "Île-de-France" },
+            { "@type": "AdministrativeArea", name: "Oise" },
+          ],
+          openingHours: "Mo-Sa 08:00-19:00",
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -102,7 +147,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>
@@ -119,8 +164,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SiteHeader />
+      <main>
+        <Outlet />
+      </main>
+      <SiteFooter />
+      <MobileCallButton />
     </QueryClientProvider>
   );
 }
