@@ -43,7 +43,7 @@ export function Simulator() {
       const n = Number(v);
       return Number.isFinite(n) && n >= 1800 && n <= CURRENT_YEAR;
     }
-    return v !== undefined && v !== "";
+    return v !== undefined;
   }, [answers, currentKey]);
 
   function pick<K extends StepKey>(key: K, value: SimulatorAnswers[K]) {
