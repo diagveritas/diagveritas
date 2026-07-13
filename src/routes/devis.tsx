@@ -40,20 +40,23 @@ const schema = z.object({
 function DevisPage() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [preselected, setPreselected] = useState<Set<string>>(new Set());
+  const [preselected, setPreselected] = useState<Set<string> | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      setPreselected(new Set());
+      return;
+    }
     const params = new URLSearchParams(window.location.search);
     const raw = params.get("diagnostics");
-    if (!raw) return;
-    const slugs = raw.split(",").map((s) => s.trim()).filter(Boolean);
-    const names = new Set(
-      DIAGNOSTICS.filter((d) => slugs.includes(d.slug)).map((d) =>
-        d.name.split("—")[0].trim(),
+    const slugs = raw ? raw.split(",").map((s) => s.trim()).filter(Boolean) : [];
+    setPreselected(
+      new Set(
+        DIAGNOSTICS.filter((d) => slugs.includes(d.slug)).map((d) =>
+          d.name.split("—")[0].trim(),
+        ),
       ),
     );
-    setPreselected(names);
   }, []);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
