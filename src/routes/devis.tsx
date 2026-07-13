@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Send, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
@@ -40,6 +40,21 @@ const schema = z.object({
 function DevisPage() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [preselected, setPreselected] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get("diagnostics");
+    if (!raw) return;
+    const slugs = raw.split(",").map((s) => s.trim()).filter(Boolean);
+    const names = new Set(
+      DIAGNOSTICS.filter((d) => slugs.includes(d.slug)).map((d) =>
+        d.name.split("—")[0].trim(),
+      ),
+    );
+    setPreselected(names);
+  }, []);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -178,6 +193,7 @@ function DevisPage() {
                       type="checkbox"
                       name="diagnostics"
                       value={d.name.split("—")[0].trim()}
+                      defaultChecked={preselected.has(d.name.split("—")[0].trim())}
                       className="mt-0.5 h-4 w-4 accent-[var(--gold)]"
                     />
                     <span className="text-foreground/90">{d.name.split("—")[0].trim()}</span>

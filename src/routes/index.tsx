@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, ShieldCheck, Award, Clock, MapPin, ArrowRight, Star } from "lucide-react";
+import { Phone, ShieldCheck, Award, Clock, MapPin, ArrowRight, Star, Compass } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
@@ -189,6 +189,34 @@ function Index() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      {/* SIMULATEUR CTA */}
+      <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-sm border border-gold/40 bg-gradient-to-br from-card via-background to-card p-8 sm:p-12">
+          <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-2xl">
+              <div className="mb-3 inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-gold">
+                <Compass className="h-4 w-4" /> Simulateur gratuit
+              </div>
+              <h3 className="font-display text-2xl text-foreground sm:text-4xl">
+                Pas sûr des diagnostics obligatoires <br className="hidden sm:block" />
+                <span className="gold-gradient-text">pour votre bien ?</span>
+              </h3>
+              <p className="mt-4 text-sm text-muted-foreground sm:text-base">
+                Répondez à 7 questions simples et obtenez instantanément la liste des
+                diagnostics requis par la réglementation française.
+              </p>
+            </div>
+            <Link
+              to="/simulateur"
+              className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-sm bg-gold px-8 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--shadow-gold)] hover:opacity-90"
+            >
+              Trouver mes diagnostics obligatoires
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </div>
         </div>
       </section>
 

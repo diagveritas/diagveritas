@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SimulateurRouteImport } from './routes/simulateur'
 import { Route as DiagnosticsRouteImport } from './routes/diagnostics'
 import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -26,6 +27,11 @@ const TarifsRoute = TarifsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulateurRoute = SimulateurRouteImport.update({
+  id: '/simulateur',
+  path: '/simulateur',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticsRoute = DiagnosticsRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
     | '/diagnostics/$slug'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
     | '/diagnostics/$slug'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
     | '/diagnostics/$slug'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DevisRoute: typeof DevisRoute
   DiagnosticsRoute: typeof DiagnosticsRouteWithChildren
+  SimulateurRoute: typeof SimulateurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TarifsRoute: typeof TarifsRoute
 }
@@ -147,6 +160,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulateur': {
+      id: '/simulateur'
+      path: '/simulateur'
+      fullPath: '/simulateur'
+      preLoaderRoute: typeof SimulateurRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostics': {
@@ -212,6 +232,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DevisRoute: DevisRoute,
   DiagnosticsRoute: DiagnosticsRouteWithChildren,
+  SimulateurRoute: SimulateurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TarifsRoute: TarifsRoute,
 }
