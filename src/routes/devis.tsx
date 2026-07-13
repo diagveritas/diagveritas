@@ -196,7 +196,7 @@ function DevisPage() {
                       type="checkbox"
                       name="diagnostics"
                       value={d.name.split("—")[0].trim()}
-                      defaultChecked={preselected.has(d.name.split("—")[0].trim())}
+                      defaultChecked={preselected?.has(d.name.split("—")[0].trim()) ?? false}
                       className="mt-0.5 h-4 w-4 accent-[var(--gold)]"
                     />
                     <span className="text-foreground/90">{d.name.split("—")[0].trim()}</span>
