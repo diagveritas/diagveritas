@@ -405,14 +405,13 @@ function Result({ answers, onReset }: { answers: SimulatorAnswers; onReset: () =
         </div>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link
-            to="/devis"
-            search={{ diagnostics: slugs }}
+          <a
+            href={`/devis${slugs ? `?diagnostics=${encodeURIComponent(slugs)}` : ""}`}
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--shadow-gold)] hover:opacity-90"
           >
             Demander un devis
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
           <a
             href={`tel:${CONTACT.phoneRaw}`}
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-sm border border-gold/50 px-7 py-4 text-sm font-semibold uppercase tracking-widest text-gold hover:bg-gold/10"
