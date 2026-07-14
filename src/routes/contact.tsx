@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, AlertCircle, Loader2 } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT } from "@/lib/diagnostics-data";
 
@@ -35,11 +35,18 @@ const schema = z.object({
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
+    const fd = new FormData(form);
+    if ((fd.get("_honey") as string)?.trim()) {
+      setSent(true);
+      return;
+    }
     const data = {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
@@ -56,12 +63,44 @@ function ContactPage() {
       return;
     }
     setErrors({});
-    const subject = encodeURIComponent(`Contact site — ${parsed.data.name}`);
-    const body = encodeURIComponent(
-      `Nom: ${parsed.data.name}\nEmail: ${parsed.data.email}\nTéléphone: ${parsed.data.phone}\n\n${parsed.data.message}`,
-    );
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    const d = parsed.data;
+    setSubmitError(null);
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(CONTACT.email)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `Nouveau message contact — ${d.name}`,
+            _template: "table",
+            _captcha: "false",
+            _replyto: d.email,
+            Nom: d.name,
+            Email: d.email,
+            Téléphone: d.phone,
+            Message: d.message,
+          }),
+        },
+      );
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || (json && json.success === "false")) {
+        throw new Error("send_failed");
+      }
+      setSent(true);
+    } catch {
+      setSubmitError(
+        "L'envoi a échoué. Merci de réessayer dans un instant ou de nous appeler au " +
+          CONTACT.phone +
+          ".",
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -152,13 +191,36 @@ function ContactPage() {
             </h2>
             {sent ? (
               <div className="mt-8 rounded-sm border border-gold/40 bg-card p-8 text-center">
-                <div className="text-lg text-gold">Merci !</div>
+                <div className="text-lg text-gold">Votre demande a bien été envoyée.</div>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Votre client mail vient de s'ouvrir. Nous vous répondons sous 24h.
+                  DIAG VERITAS vous recontactera rapidement.
                 </p>
               </div>
             ) : (
               <form onSubmit={onSubmit} className="mt-8 space-y-5" noValidate>
+                {submitError && (
+                  <div className="flex items-start gap-3 rounded-sm border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+                    <AlertCircle className="h-5 w-5 shrink-0" />
+                    <div className="flex-1">
+                      <div>{submitError}</div>
+                      <button
+                        type="button"
+                        onClick={() => setSubmitError(null)}
+                        className="mt-2 text-xs font-semibold uppercase tracking-widest underline"
+                      >
+                        Réessayer
+                      </button>
+                    </div>
+                  </div>
+                )}
+                <input
+                  type="text"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-5000px", opacity: 0 }}
+                />
                 <Field label="Nom & prénom" name="name" error={errors.name} />
                 <Field label="Email" name="email" type="email" error={errors.email} />
                 <Field label="Téléphone" name="phone" type="tel" error={errors.phone} />
@@ -177,9 +239,18 @@ function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90"
+                  disabled={loading}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90 disabled:opacity-60"
                 >
-                  <Send className="h-4 w-4" /> Envoyer
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" /> Envoi en cours…
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" /> Envoyer
+                    </>
+                  )}
                 </button>
               </form>
             )}

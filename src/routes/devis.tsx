@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { Send, ShieldCheck } from "lucide-react";
+import { Send, ShieldCheck, AlertCircle, Loader2 } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
 
@@ -39,6 +39,8 @@ const schema = z.object({
 
 function DevisPage() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [preselected, setPreselected] = useState<Set<string> | null>(null);
 
@@ -59,10 +61,15 @@ function DevisPage() {
     );
   }, []);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
+    // Honeypot: if filled, silently drop (bot).
+    if ((fd.get("_honey") as string)?.trim()) {
+      setSent(true);
+      return;
+    }
     const data = {
       name: (fd.get("name") || "") as string,
       email: (fd.get("email") || "") as string,
@@ -85,26 +92,47 @@ function DevisPage() {
     }
     setErrors({});
     const d = parsed.data;
-    const subject = encodeURIComponent(`Demande de devis — ${d.name}`);
-    const body = encodeURIComponent(
-      [
-        `Nom: ${d.name}`,
-        `Email: ${d.email}`,
-        `Téléphone: ${d.phone}`,
-        ``,
-        `Type de bien: ${d.propertyType}`,
-        `Surface: ${d.surface || "non précisée"}`,
-        `Adresse: ${d.address}`,
-        ``,
-        `Diagnostics souhaités:`,
-        ...d.diagnostics.map((x) => ` - ${x}`),
-        ``,
-        `Message:`,
-        d.message || "(aucun)",
-      ].join("\n"),
-    );
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setSubmitError(null);
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(CONTACT.email)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `Nouvelle demande de devis — ${d.name}`,
+            _template: "table",
+            _captcha: "false",
+            _replyto: d.email,
+            Nom: d.name,
+            Email: d.email,
+            Téléphone: d.phone,
+            "Type de bien": d.propertyType,
+            "Surface (m²)": d.surface || "non précisée",
+            "Adresse du bien": d.address,
+            "Diagnostics demandés": d.diagnostics.join(", "),
+            Message: d.message || "(aucun)",
+          }),
+        },
+      );
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || (json && json.success === "false")) {
+        throw new Error("send_failed");
+      }
+      setSent(true);
+    } catch {
+      setSubmitError(
+        "L'envoi a échoué. Merci de réessayer dans un instant ou de nous appeler au " +
+          CONTACT.phone +
+          ".",
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -124,10 +152,10 @@ function DevisPage() {
           <div className="rounded-sm border border-gold/40 bg-card p-12 text-center">
             <ShieldCheck className="mx-auto h-12 w-12 text-gold" />
             <h2 className="mt-6 font-display text-2xl text-foreground">
-              Demande envoyée !
+              Votre demande a bien été envoyée.
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Votre client mail vient de s'ouvrir. Nous vous répondons sous 24h.
+              DIAG VERITAS vous recontactera rapidement.
             </p>
           </div>
         ) : (
@@ -136,6 +164,30 @@ function DevisPage() {
             className="space-y-8 rounded-sm border border-gold/20 bg-card p-6 sm:p-10"
             noValidate
           >
+            {submitError && (
+              <div className="flex items-start gap-3 rounded-sm border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+                <AlertCircle className="h-5 w-5 shrink-0" />
+                <div className="flex-1">
+                  <div>{submitError}</div>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitError(null)}
+                    className="mt-2 text-xs font-semibold uppercase tracking-widest underline"
+                  >
+                    Réessayer
+                  </button>
+                </div>
+              </div>
+            )}
+            {/* Honeypot anti-spam (invisible aux humains) */}
+            <input
+              type="text"
+              name="_honey"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-5000px", opacity: 0 }}
+            />
             <div>
               <h3 className="font-display text-lg text-gold">Vos coordonnées</h3>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -222,9 +274,18 @@ function DevisPage() {
 
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90"
+              disabled={loading}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90 disabled:opacity-60"
             >
-              <Send className="h-4 w-4" /> Envoyer la demande
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" /> Envoi en cours…
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4" /> Envoyer la demande
+                </>
+              )}
             </button>
             <p className="text-center text-xs text-muted-foreground">
               Vos données ne sont utilisées que pour vous recontacter, jamais transmises.
