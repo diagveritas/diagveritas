@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { CITIES } from "@/lib/cities-data";
 
-// TODO: replace with your project URL once a custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://diagveritas.lovable.app";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -17,9 +17,15 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/a-propos", priority: "0.6", changefreq: "yearly" },
           { path: "/contact", priority: "0.7", changefreq: "yearly" },
           { path: "/devis", priority: "0.9", changefreq: "monthly" },
+          { path: "/zones", priority: "0.9", changefreq: "monthly" },
           ...DIAGNOSTICS.map((d) => ({
             path: `/diagnostics/${d.slug}`,
             priority: "0.8",
+            changefreq: "monthly" as const,
+          })),
+          ...CITIES.map((c) => ({
+            path: `/diagnostiqueur-immobilier/${c.slug}`,
+            priority: "0.9",
             changefreq: "monthly" as const,
           })),
         ];

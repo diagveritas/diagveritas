@@ -192,7 +192,7 @@ function CityPage() {
             </div>
             <h3 className="mt-10 font-display text-xl text-foreground">Quartiers couverts</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
-              {city.neighborhoods.map((q) => (
+              {city.neighborhoods.map((q: string) => (
                 <li
                   key={q}
                   className="rounded-full border border-gold/25 px-3 py-1.5 text-xs uppercase tracking-widest text-muted-foreground"

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, ShieldCheck } from "lucide-react";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { CITIES } from "@/lib/cities-data";
 
 export function SiteFooter() {
   return (
@@ -47,10 +48,22 @@ export function SiteFooter() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-widest text-gold">Zones desservies</h3>
             <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
-              <li>Livry-Gargan (93)</li>
-              <li>Seine-Saint-Denis</li>
-              <li>Île-de-France</li>
-              <li>Oise (60)</li>
+              {CITIES.slice(0, 8).map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    to="/diagnostiqueur-immobilier/$ville"
+                    params={{ ville: c.slug }}
+                    className="transition-colors hover:text-gold"
+                  >
+                    Diagnostiqueur {c.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link to="/zones" className="transition-colors hover:text-gold">
+                  Toutes les zones →
+                </Link>
+              </li>
             </ul>
           </div>
 

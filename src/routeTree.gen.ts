@@ -17,6 +17,7 @@ import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
 import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
 
 const TarifsRoute = TarifsRouteImport.update({
@@ -59,6 +60,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiagnostiqueurImmobilierVilleRoute =
+  DiagnostiqueurImmobilierVilleRouteImport.update({
+    id: '/diagnostiqueur-immobilier/$ville',
+    path: '/diagnostiqueur-immobilier/$ville',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DiagnosticsSlugRoute = DiagnosticsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -75,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
+  '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +94,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
+  '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +107,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
+  '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tarifs'
     | '/diagnostics/$slug'
+    | '/diagnostiqueur-immobilier/$ville'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tarifs'
     | '/diagnostics/$slug'
+    | '/diagnostiqueur-immobilier/$ville'
   id:
     | '__root__'
     | '/'
@@ -133,6 +145,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tarifs'
     | '/diagnostics/$slug'
+    | '/diagnostiqueur-immobilier/$ville'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,6 +157,7 @@ export interface RootRouteChildren {
   SimulateurRoute: typeof SimulateurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TarifsRoute: typeof TarifsRoute
+  DiagnostiqueurImmobilierVilleRoute: typeof DiagnostiqueurImmobilierVilleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -204,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/diagnostiqueur-immobilier/$ville': {
+      id: '/diagnostiqueur-immobilier/$ville'
+      path: '/diagnostiqueur-immobilier/$ville'
+      fullPath: '/diagnostiqueur-immobilier/$ville'
+      preLoaderRoute: typeof DiagnostiqueurImmobilierVilleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostics/$slug': {
       id: '/diagnostics/$slug'
       path: '/$slug'
@@ -235,6 +256,7 @@ const rootRouteChildren: RootRouteChildren = {
   SimulateurRoute: SimulateurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TarifsRoute: TarifsRoute,
+  DiagnostiqueurImmobilierVilleRoute: DiagnostiqueurImmobilierVilleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
