@@ -67,28 +67,25 @@ function ContactPage() {
     setSubmitError(null);
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://formsubmit.co/ajax/${encodeURIComponent(CONTACT.email)}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            _subject: `Nouveau message contact — ${d.name}`,
-            _template: "table",
-            _captcha: "false",
-            _replyto: d.email,
-            Nom: d.name,
-            Email: d.email,
-            Téléphone: d.phone,
-            Message: d.message,
-          }),
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-      );
+        body: JSON.stringify({
+          access_key: "a8207abe-c423-4c40-b3dd-121dffb41bdd",
+          subject: `Nouveau message contact — ${d.name}`,
+          from_name: "DIAG VERITAS — Formulaire contact",
+          replyto: d.email,
+          Nom: d.name,
+          Email: d.email,
+          Téléphone: d.phone,
+          Message: d.message,
+        }),
+      });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || (json && json.success === "false")) {
+      if (!res.ok || !json?.success) {
         throw new Error("send_failed");
       }
       setSent(true);

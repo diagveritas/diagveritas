@@ -95,32 +95,29 @@ function DevisPage() {
     setSubmitError(null);
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://formsubmit.co/ajax/${encodeURIComponent(CONTACT.email)}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            _subject: `Nouvelle demande de devis — ${d.name}`,
-            _template: "table",
-            _captcha: "false",
-            _replyto: d.email,
-            Nom: d.name,
-            Email: d.email,
-            Téléphone: d.phone,
-            "Type de bien": d.propertyType,
-            "Surface (m²)": d.surface || "non précisée",
-            "Adresse du bien": d.address,
-            "Diagnostics demandés": d.diagnostics.join(", "),
-            Message: d.message || "(aucun)",
-          }),
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-      );
+        body: JSON.stringify({
+          access_key: "a8207abe-c423-4c40-b3dd-121dffb41bdd",
+          subject: `Nouvelle demande de devis — ${d.name}`,
+          from_name: "DIAG VERITAS — Demande de devis",
+          replyto: d.email,
+          Nom: d.name,
+          Email: d.email,
+          Téléphone: d.phone,
+          "Type de bien": d.propertyType,
+          "Surface (m²)": d.surface || "non précisée",
+          "Adresse du bien": d.address,
+          "Diagnostics demandés": d.diagnostics.join(", "),
+          Message: d.message || "(aucun)",
+        }),
+      });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || (json && json.success === "false")) {
+      if (!res.ok || !json?.success) {
         throw new Error("send_failed");
       }
       setSent(true);
