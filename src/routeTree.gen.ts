@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZonesRouteImport } from './routes/zones'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimulateurRouteImport } from './routes/simulateur'
@@ -17,8 +18,14 @@ import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
 import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
 
+const ZonesRoute = ZonesRouteImport.update({
+  id: '/zones',
+  path: '/zones',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
   path: '/tarifs',
@@ -59,6 +66,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiagnostiqueurImmobilierVilleRoute =
+  DiagnostiqueurImmobilierVilleRouteImport.update({
+    id: '/diagnostiqueur-immobilier/$ville',
+    path: '/diagnostiqueur-immobilier/$ville',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DiagnosticsSlugRoute = DiagnosticsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -74,7 +87,9 @@ export interface FileRoutesByFullPath {
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
+  '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
+  '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,7 +100,9 @@ export interface FileRoutesByTo {
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
+  '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
+  '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -97,7 +114,9 @@ export interface FileRoutesById {
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
+  '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
+  '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -110,7 +129,9 @@ export interface FileRouteTypes {
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
+    | '/zones'
     | '/diagnostics/$slug'
+    | '/diagnostiqueur-immobilier/$ville'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -121,7 +142,9 @@ export interface FileRouteTypes {
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
+    | '/zones'
     | '/diagnostics/$slug'
+    | '/diagnostiqueur-immobilier/$ville'
   id:
     | '__root__'
     | '/'
@@ -132,7 +155,9 @@ export interface FileRouteTypes {
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
+    | '/zones'
     | '/diagnostics/$slug'
+    | '/diagnostiqueur-immobilier/$ville'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,10 +169,19 @@ export interface RootRouteChildren {
   SimulateurRoute: typeof SimulateurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TarifsRoute: typeof TarifsRoute
+  ZonesRoute: typeof ZonesRoute
+  DiagnostiqueurImmobilierVilleRoute: typeof DiagnostiqueurImmobilierVilleRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zones': {
+      id: '/zones'
+      path: '/zones'
+      fullPath: '/zones'
+      preLoaderRoute: typeof ZonesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tarifs': {
       id: '/tarifs'
       path: '/tarifs'
@@ -204,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/diagnostiqueur-immobilier/$ville': {
+      id: '/diagnostiqueur-immobilier/$ville'
+      path: '/diagnostiqueur-immobilier/$ville'
+      fullPath: '/diagnostiqueur-immobilier/$ville'
+      preLoaderRoute: typeof DiagnostiqueurImmobilierVilleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostics/$slug': {
       id: '/diagnostics/$slug'
       path: '/$slug'
@@ -235,17 +276,9 @@ const rootRouteChildren: RootRouteChildren = {
   SimulateurRoute: SimulateurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TarifsRoute: TarifsRoute,
+  ZonesRoute: ZonesRoute,
+  DiagnostiqueurImmobilierVilleRoute: DiagnostiqueurImmobilierVilleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

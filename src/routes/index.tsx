@@ -3,6 +3,7 @@ import { Phone, ShieldCheck, Award, Clock, MapPin, ArrowRight, Star, Compass } f
 import heroImage from "@/assets/hero.jpg";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { CITIES } from "@/lib/cities-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -279,31 +280,24 @@ function Index() {
             description="Nous intervenons sans surcoût dans toute la région parisienne et le sud de l'Oise."
           />
           <div className="mt-12 flex flex-wrap justify-center gap-3">
-            {[
-              "Livry-Gargan",
-              "Aulnay-sous-Bois",
-              "Le Raincy",
-              "Bondy",
-              "Sevran",
-              "Villemomble",
-              "Rosny-sous-Bois",
-              "Montfermeil",
-              "Clichy-sous-Bois",
-              "Paris",
-              "Chelles",
-              "Meaux",
-              "Chantilly",
-              "Senlis",
-              "Creil",
-              "Beauvais",
-            ].map((v) => (
-              <span
-                key={v}
-                className="rounded-full border border-gold/30 px-4 py-2 text-xs uppercase tracking-widest text-muted-foreground"
+            {CITIES.map((c) => (
+              <Link
+                key={c.slug}
+                to="/diagnostiqueur-immobilier/$ville"
+                params={{ ville: c.slug }}
+                className="rounded-full border border-gold/30 px-4 py-2 text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:border-gold/70 hover:text-gold"
               >
-                {v}
-              </span>
+                {c.name}
+              </Link>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              to="/zones"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold hover:opacity-80"
+            >
+              Voir toutes les zones d'intervention <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </div>
       </section>
