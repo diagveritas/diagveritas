@@ -1,10 +1,40 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, Phone, MapPin, ShieldCheck, Clock, Building2, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Phone, MapPin, ShieldCheck, Clock, Building2, CheckCircle2, HelpCircle } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CITIES, cityBySlug } from "@/lib/cities-data";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { trackCall, trackQuoteCta } from "@/lib/track";
 
 const SITE_URL = "https://diagveritas.lovable.app";
+
+function cityFaq(cityName: string) {
+  return [
+    {
+      q: `Quel est le prix d'un DPE à ${cityName} ?`,
+      a: `Le prix d'un DPE à ${cityName} démarre à 99€ TTC pour un appartement standard. Le tarif final dépend de la surface, de l'ancienneté du bien et du nombre de diagnostics groupés. DIAG VERITAS vous transmet un devis ferme sous 24h.`,
+    },
+    {
+      q: `Combien de temps pour intervenir à ${cityName} ?`,
+      a: `Nous intervenons sous 48h ouvrées à ${cityName}. Le rapport de diagnostic vous est remis rapidement, souvent le jour même de la visite pour les diagnostics simples (DPE, Loi Carrez, Loi Boutin).`,
+    },
+    {
+      q: `Quels diagnostics sont obligatoires pour vendre à ${cityName} ?`,
+      a: `Pour une vente à ${cityName}, sont généralement obligatoires : le DPE, l'ERP, le diagnostic électrique (installation > 15 ans), le diagnostic gaz (installation > 15 ans), l'amiante (permis avant 07/1997), le CREP plomb (bien avant 1949) et la Loi Carrez (copropriété). Le diagnostic termites peut s'ajouter si la commune est en zone préfectorale à risque.`,
+    },
+    {
+      q: `DIAG VERITAS est-il certifié à ${cityName} ?`,
+      a: `Oui. DIAG VERITAS est certifié Bureau Veritas pour l'ensemble des diagnostics réglementaires, accrédité COFRAC, et couvert par une assurance RC Pro conforme à la législation. Nos certifications sont vérifiables sur simple demande.`,
+    },
+    {
+      q: `Intervenez-vous sans surcoût de déplacement à ${cityName} ?`,
+      a: `Oui. ${cityName} fait partie de notre zone d'intervention immédiate depuis Livry-Gargan (93). Aucun frais de déplacement n'est ajouté au devis.`,
+    },
+    {
+      q: `Comment obtenir un devis pour ${cityName} ?`,
+      a: `Vous pouvez demander votre devis en ligne via notre formulaire de demande de devis, utiliser notre simulateur pour identifier les diagnostics obligatoires, ou nous appeler directement au ${CONTACT.phone}. Réponse garantie sous 24h.`,
+    },
+  ];
+}
 
 export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
   loader: ({ params }) => {
@@ -25,6 +55,7 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
     const url = `${SITE_URL}/diagnostiqueur-immobilier/${params.ville}`;
     const title = `Diagnostiqueur immobilier ${city.name} (${city.postalCode}) — DPE, amiante, plomb | DIAG VERITAS`;
     const description = `Diagnostic immobilier à ${city.name} : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin & Carrez. Diagnostiqueur certifié Bureau Veritas, intervention sous 48h. Devis gratuit.`;
+    const faqs = cityFaq(city.name);
 
     return {
       meta: [
@@ -63,6 +94,11 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
               addressRegion: "Île-de-France",
               addressCountry: "FR",
             },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 48.9186,
+              longitude: 2.5384,
+            },
             areaServed: {
               "@type": "City",
               name: city.name,
@@ -74,7 +110,14 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
                 addressCountry: "FR",
               },
             },
-            openingHours: "Mo-Sa 08:00-19:00",
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                opens: "08:00",
+                closes: "19:00",
+              },
+            ],
             sameAs: [`${SITE_URL}`],
           }),
         },
@@ -104,6 +147,18 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Accueil", item: SITE_URL },
@@ -123,6 +178,7 @@ function CityPage() {
   const nearby = CITIES.filter((c) => c.slug !== city.slug)
     .sort((a, b) => Math.abs(a.distanceKm - city.distanceKm) - Math.abs(b.distanceKm - city.distanceKm))
     .slice(0, 6);
+  const faqs = cityFaq(city.name);
 
   return (
     <div>
@@ -148,12 +204,14 @@ function CityPage() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/devis"
+              onClick={() => trackQuoteCta(`city:${city.slug}:hero`)}
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--shadow-gold)] hover:opacity-90"
             >
               Devis gratuit pour {city.name} <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href={`tel:${CONTACT.phoneRaw}`}
+              onClick={() => trackCall(`city:${city.slug}:hero`)}
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold/50 px-7 py-4 text-sm font-semibold uppercase tracking-widest text-gold hover:bg-gold/10"
             >
               <Phone className="h-4 w-4" /> {CONTACT.phone}
@@ -224,11 +282,33 @@ function CityPage() {
             </ul>
             <Link
               to="/devis"
+              onClick={() => trackQuoteCta(`city:${city.slug}:sidebar`)}
               className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gold px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90"
             >
               Devis {city.name}
             </Link>
           </aside>
+        </div>
+      </section>
+
+      {/* FAQ (avec balisage FAQPage Schema.org — voir head()) */}
+      <section className="border-t border-gold/15 bg-background">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Questions fréquentes"
+            title={`Diagnostic immobilier à ${city.name} — FAQ`}
+          />
+          <dl className="mt-12 divide-y divide-gold/15 rounded-sm border border-gold/20 bg-card">
+            {faqs.map((f) => (
+              <div key={f.q} className="p-6 sm:p-8">
+                <dt className="flex items-start gap-3 font-display text-lg text-foreground">
+                  <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                  <span>{f.q}</span>
+                </dt>
+                <dd className="mt-3 pl-8 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -270,12 +350,14 @@ function CityPage() {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               to="/devis"
+              onClick={() => trackQuoteCta(`city:${city.slug}:footer`)}
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-8 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90"
             >
               Demander un devis
             </Link>
             <a
               href={`tel:${CONTACT.phoneRaw}`}
+              onClick={() => trackCall(`city:${city.slug}:footer`)}
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold/50 px-8 py-4 text-sm font-semibold uppercase tracking-widest text-gold hover:bg-gold/10"
             >
               <Phone className="h-4 w-4" /> Appeler maintenant

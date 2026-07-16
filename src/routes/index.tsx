@@ -4,6 +4,7 @@ import heroImage from "@/assets/hero.jpg";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
 import { CITIES } from "@/lib/cities-data";
+import { trackCall, trackQuoteCta } from "@/lib/track";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -107,6 +108,7 @@ function Index() {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/devis"
+                onClick={() => trackQuoteCta("home:hero")}
                 className="group inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--shadow-gold)] transition-all hover:opacity-90"
               >
                 Demander un devis
@@ -114,6 +116,7 @@ function Index() {
               </Link>
               <a
                 href={`tel:${CONTACT.phoneRaw}`}
+                onClick={() => trackCall("home:hero")}
                 className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold/50 px-7 py-4 text-sm font-semibold uppercase tracking-widest text-gold transition-colors hover:bg-gold/10"
               >
                 <Phone className="h-4 w-4" /> {CONTACT.phone}
@@ -315,12 +318,14 @@ function Index() {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               to="/devis"
+              onClick={() => trackQuoteCta("home:footer")}
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-8 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90"
             >
               Demande de devis
             </Link>
             <a
               href={`tel:${CONTACT.phoneRaw}`}
+              onClick={() => trackCall("home:footer")}
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold/50 px-8 py-4 text-sm font-semibold uppercase tracking-widest text-gold hover:bg-gold/10"
             >
               <Phone className="h-4 w-4" /> Appeler maintenant

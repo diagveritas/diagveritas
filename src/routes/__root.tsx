@@ -133,12 +133,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressRegion: "Île-de-France",
             addressCountry: "FR",
           },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 48.9186,
+            longitude: 2.5384,
+          },
+          priceRange: "€€",
           areaServed: [
             { "@type": "AdministrativeArea", name: "Seine-Saint-Denis" },
+            { "@type": "AdministrativeArea", name: "Seine-et-Marne" },
+            { "@type": "AdministrativeArea", name: "Val-d'Oise" },
             { "@type": "AdministrativeArea", name: "Île-de-France" },
             { "@type": "AdministrativeArea", name: "Oise" },
           ],
-          openingHours: "Mo-Sa 08:00-19:00",
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              opens: "08:00",
+              closes: "19:00",
+            },
+          ],
         }),
       },
     ],

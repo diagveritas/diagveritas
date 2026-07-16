@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Phone, Mail, MapPin, Clock, Send, AlertCircle, Loader2 } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT } from "@/lib/diagnostics-data";
+import { track, trackCall } from "@/lib/track";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -89,6 +90,7 @@ function ContactPage() {
         throw new Error("send_failed");
       }
       setSent(true);
+      track("contact_submit", {});
     } catch {
       setSubmitError(
         "L'envoi a échoué. Merci de réessayer dans un instant ou de nous appeler au " +
@@ -125,6 +127,7 @@ function ContactPage() {
                   <div className="text-xs uppercase tracking-widest text-gold">Téléphone</div>
                   <a
                     href={`tel:${CONTACT.phoneRaw}`}
+                    onClick={() => trackCall("contact_page")}
                     className="mt-1 block text-lg text-foreground hover:text-gold"
                   >
                     {CONTACT.phone}
