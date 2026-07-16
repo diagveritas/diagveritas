@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Send, ShieldCheck, AlertCircle, Loader2 } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { track } from "@/lib/track";
 
 export const Route = createFileRoute("/devis")({
   head: () => ({
@@ -121,6 +122,7 @@ function DevisPage() {
         throw new Error("send_failed");
       }
       setSent(true);
+      track("quote_submit", { diagnostics: d.diagnostics.length, propertyType: d.propertyType });
     } catch {
       setSubmitError(
         "L'envoi a échoué. Merci de réessayer dans un instant ou de nous appeler au " +
