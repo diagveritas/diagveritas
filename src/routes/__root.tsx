@@ -119,8 +119,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          "@type": ["LocalBusiness", "ProfessionalService"],
+          "@id": "https://diagveritas.lovable.app/#business",
           name: "DIAG VERITAS",
+          alternateName: "Diag Veritas Diagnostic Immobilier",
+          url: "https://diagveritas.lovable.app",
+          logo: "https://diagveritas.lovable.app/favicon.ico",
+          image: "https://diagveritas.lovable.app/favicon.ico",
           description:
             "Diagnostics immobiliers certifiés en Île-de-France et dans l'Oise : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez.",
           telephone: "+33672297362",
@@ -154,6 +159,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               closes: "19:00",
             },
           ],
+          knowsAbout: [
+            "DPE", "Diagnostic amiante", "CREP plomb", "Diagnostic électricité",
+            "Diagnostic gaz", "Diagnostic termites", "ERP", "Loi Boutin", "Loi Carrez",
+            "PPPT", "DTG", "DPE collectif", "RAAT", "RAAD"
+          ],
+          hasCredential: [
+            { "@type": "EducationalOccupationalCredential", name: "Certification Bureau Veritas" },
+            { "@type": "EducationalOccupationalCredential", name: "Accréditation COFRAC" }
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://diagveritas.lovable.app/#website",
+          url: "https://diagveritas.lovable.app",
+          name: "DIAG VERITAS",
+          inLanguage: "fr-FR",
+          publisher: { "@id": "https://diagveritas.lovable.app/#business" },
         }),
       },
     ],
