@@ -23,6 +23,7 @@ export interface Diagnostic {
   details: string[];
   seoTitle: string;
   seoDescription: string;
+  faq?: { q: string; a: string }[];
 }
 
 export const DIAGNOSTICS: Diagnostic[] = [
