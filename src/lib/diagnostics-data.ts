@@ -207,6 +207,106 @@ export const DIAGNOSTICS: Diagnostic[] = [
     seoDescription:
       "Mesurage Loi Carrez pour vente en copropriété. Diagnostiqueur certifié Bureau Veritas à Livry-Gargan, Seine-Saint-Denis, Île-de-France et Oise.",
   },
+  {
+    slug: "pppt",
+    name: "PPPT — Projet de Plan Pluriannuel de Travaux",
+    short: "Plan de travaux obligatoire pour les copropriétés de plus de 15 ans (loi Climat & Résilience).",
+    icon: FileText,
+    priceFrom: 690,
+    validity: "10 ans (mise à jour tous les 10 ans)",
+    obligation: "Copropriétés à usage partiel ou total d'habitation de plus de 15 ans",
+    description:
+      "Le PPPT identifie les travaux nécessaires à la sauvegarde de l'immeuble et à l'amélioration de sa performance énergétique sur les 10 années à venir. Il est obligatoire depuis la loi Climat & Résilience selon un calendrier lié à la taille de la copropriété.",
+    details: [
+      "Analyse du bâti, des équipements et des consommations",
+      "Liste hiérarchisée des travaux sur 10 ans avec estimation budgétaire",
+      "Échéancier de mise en œuvre et priorisation énergétique",
+      "Vote en assemblée générale des copropriétaires",
+    ],
+    seoTitle: "PPPT copropriété Île-de-France & Oise — Plan Pluriannuel de Travaux | DIAG VERITAS",
+    seoDescription:
+      "PPPT loi Climat & Résilience pour votre copropriété. Diagnostiqueur certifié à Livry-Gargan, intervention Seine-Saint-Denis, Île-de-France et Oise. Devis rapide.",
+  },
+  {
+    slug: "dtg",
+    name: "DTG — Diagnostic Technique Global",
+    short: "Analyse complète de l'état d'un immeuble en copropriété, obligatoire dans plusieurs cas.",
+    icon: FileText,
+    priceFrom: 990,
+    validity: "10 ans",
+    obligation: "Immeubles > 10 ans mis en copropriété, ou sur vote AG",
+    description:
+      "Le DTG évalue l'état apparent des parties communes, la situation du syndicat, les obligations réglementaires et fournit un plan pluriannuel de travaux. Il éclaire les copropriétaires sur la santé technique et financière de leur immeuble.",
+    details: [
+      "État apparent des parties communes et équipements",
+      "Analyse des améliorations possibles de gestion technique",
+      "Diagnostic de performance énergétique de l'immeuble",
+      "Évaluation des travaux à prévoir dans les 10 ans",
+    ],
+    seoTitle: "DTG — Diagnostic Technique Global copropriété | DIAG VERITAS Île-de-France",
+    seoDescription:
+      "DTG pour copropriété en Île-de-France et Oise : analyse complète du bâti, équipements et travaux à prévoir. Diagnostiqueur certifié Bureau Veritas.",
+  },
+  {
+    slug: "dpe-immeuble",
+    name: "DPE Immeuble — Diagnostic collectif",
+    short: "DPE à l'échelle d'un immeuble entier — obligatoire pour toutes les copropriétés selon échéancier.",
+    icon: Leaf,
+    priceFrom: 490,
+    validity: "10 ans",
+    obligation: "Copropriétés à usage principal d'habitation (calendrier loi Climat)",
+    description:
+      "Le DPE collectif évalue la performance énergétique de l'immeuble entier. Il est obligatoire pour toutes les copropriétés selon un calendrier progressif (2024 : > 200 lots, 2025 : 50 à 200 lots, 2026 : < 50 lots).",
+    details: [
+      "Méthode 3CL-DPE 2021 appliquée à l'ensemble du bâtiment",
+      "Étiquettes énergie et GES de l'immeuble collectif",
+      "Recommandations de travaux à l'échelle de la copropriété",
+      "Base indispensable au PPPT et au plan de rénovation",
+    ],
+    seoTitle: "DPE Immeuble collectif copropriété | DIAG VERITAS Île-de-France & Oise",
+    seoDescription:
+      "DPE collectif obligatoire pour copropriétés en Île-de-France et Oise. Diagnostiqueur certifié Bureau Veritas — méthode 3CL-DPE 2021, rapport rapide.",
+  },
+  {
+    slug: "amiante-avant-travaux",
+    name: "RAAT — Repérage Amiante Avant Travaux",
+    short: "Repérage amiante obligatoire avant tous travaux sur immeuble bâti (permis avant 07/1997).",
+    icon: ShieldAlert,
+    priceFrom: 350,
+    validity: "Réalisé avant chaque intervention",
+    obligation: "Tous travaux sur bâti antérieur au 1er juillet 1997",
+    description:
+      "Le Repérage Amiante Avant Travaux (RAAT) est imposé par le Code du travail (article R.4412-97) et la norme NF X 46-020. Il protège les travailleurs intervenant sur un bâtiment susceptible de contenir de l'amiante, sous peine de sanctions pénales pour le donneur d'ordre.",
+    details: [
+      "Repérage conforme à la norme NF X 46-020",
+      "Prélèvements et analyses en laboratoire COFRAC",
+      "Rapport avec cartographie et localisation précise des MPCA",
+      "Obligatoire avant toute rénovation, désamiantage ou intervention",
+    ],
+    seoTitle: "RAAT — Repérage Amiante Avant Travaux Île-de-France | DIAG VERITAS",
+    seoDescription:
+      "Repérage Amiante Avant Travaux (RAAT) certifié en Île-de-France et Oise. Norme NF X 46-020, laboratoire COFRAC, rapport rapide. Devis gratuit.",
+  },
+  {
+    slug: "amiante-avant-demolition",
+    name: "RAAD — Repérage Amiante Avant Démolition",
+    short: "Repérage exhaustif imposé avant toute démolition — le plus complet des diagnostics amiante.",
+    icon: ShieldAlert,
+    priceFrom: 550,
+    validity: "Réalisé avant chaque démolition",
+    obligation: "Toute démolition de bâtiment antérieur au 1er juillet 1997",
+    description:
+      "Le RAAD est un repérage exhaustif et destructif de l'ensemble des matériaux susceptibles de contenir de l'amiante avant démolition. Il est encadré par le Code du travail et la norme NF X 46-020, et engage la responsabilité pénale du maître d'ouvrage.",
+    details: [
+      "Repérage exhaustif de tous les MPCA (listes A, B et C)",
+      "Sondages destructifs autorisés",
+      "Prélèvements analysés en laboratoire COFRAC",
+      "Rapport détaillé nécessaire au dossier de démolition",
+    ],
+    seoTitle: "RAAD — Repérage Amiante Avant Démolition Île-de-France | DIAG VERITAS",
+    seoDescription:
+      "Repérage Amiante Avant Démolition (RAAD) certifié en Île-de-France et Oise. Norme NF X 46-020, exhaustif, rapport conforme. Devis rapide.",
+  },
 ];
 
 export const CONTACT = {
