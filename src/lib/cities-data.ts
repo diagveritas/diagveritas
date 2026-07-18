@@ -910,6 +910,204 @@ export const CITIES: City[] = [
     focus:
       "Patrimoine industriel : RAAT (amiante avant travaux) souvent exigé sur les anciennes cités.",
   },
+  {
+    slug: "coubron",
+    name: "Coubron",
+    postalCode: "93470",
+    department: "Seine-Saint-Denis",
+    departmentCode: "93",
+    distanceKm: 5,
+    population: "4 800 habitants",
+    intro:
+      "Diagnostiqueur immobilier à Coubron : DIAG VERITAS intervient sous 48h sur cette commune résidentielle voisine de Livry-Gargan. DPE, amiante, plomb, gaz, électricité et ERP.",
+    context:
+      "Coubron est une commune essentiellement pavillonnaire lovée en bordure de la forêt de Bondy. Le bâti individuel domine, avec de nombreuses maisons construites entre les années 1950 et 1980 : le diagnostic électrique et le DPE sont donc particulièrement demandés. Zone termites, elle requiert systématiquement ce diagnostic pour toute vente.",
+    neighborhoods: ["Centre-bourg", "Les Bruyères", "Malnoue", "La Fosse Maussoin"],
+    properties:
+      "Pavillons familiaux, maisons individuelles, quelques petites copropriétés — DPE, électricité et termites récurrents.",
+    focus:
+      "Zone termites préfectorale : DIAG VERITAS intègre systématiquement ce diagnostic dans les packs vente.",
+  },
+  {
+    slug: "courtry",
+    name: "Courtry",
+    postalCode: "77181",
+    department: "Seine-et-Marne",
+    departmentCode: "77",
+    distanceKm: 4,
+    population: "6 500 habitants",
+    intro:
+      "DIAG VERITAS, diagnostiqueur immobilier à Courtry (77) : nous intervenons sous 48h sur toute la commune pour vos diagnostics obligatoires vente et location.",
+    context:
+      "Courtry est une commune limitrophe de Livry-Gargan (77) à dominante pavillonnaire, en pleine transformation avec plusieurs éco-quartiers récents. Le parc immobilier associe maisons individuelles anciennes (années 60-80) et résidences neuves BBC. Pour les biens anciens, DPE, électricité et gaz sont incontournables.",
+    neighborhoods: ["Centre", "Les Bosquets", "Éco-quartier", "La Régale"],
+    properties:
+      "Maisons individuelles, pavillons, résidences neuves — DPE, électricité, gaz et Loi Carrez selon les biens.",
+    focus:
+      "Bâtiments récents BBC : le DPE reste obligatoire malgré l'excellente performance énergétique.",
+  },
+  {
+    slug: "le-pin",
+    name: "Le Pin",
+    postalCode: "77181",
+    department: "Seine-et-Marne",
+    departmentCode: "77",
+    distanceKm: 6,
+    population: "1 600 habitants",
+    intro:
+      "Diagnostiqueur immobilier au Pin (77) : DIAG VERITAS se déplace sans surcoût sur cette commune limitrophe pour vos DPE, amiante, plomb, électricité, gaz et ERP.",
+    context:
+      "Le Pin est un village résidentiel du 77, proche de Livry-Gargan. Le tissu urbain est essentiellement pavillonnaire, avec un patrimoine ancien du centre-bourg (maisons rurales, corps de ferme réhabilités). Le CREP plomb et le diagnostic amiante sont courants sur le bâti antérieur à 1949.",
+    neighborhoods: ["Centre-bourg", "Rue de Meaux", "Les Petits Prés"],
+    properties:
+      "Maisons de village, pavillons, corps de ferme — plomb, amiante et DPE pour le bâti ancien.",
+    focus:
+      "Bâti rural ancien : nous réalisons DPE, plomb et amiante en une seule visite pour optimiser vos délais de vente.",
+  },
+  {
+    slug: "vaujours",
+    name: "Vaujours",
+    postalCode: "93410",
+    department: "Seine-Saint-Denis",
+    departmentCode: "93",
+    distanceKm: 4,
+    population: "7 400 habitants",
+    intro:
+      "DIAG VERITAS, diagnostiqueur immobilier à Vaujours (93). Intervention rapide sur toute la commune pour DPE, amiante, plomb, électricité, gaz, termites et ERP.",
+    context:
+      "Vaujours est une commune boisée limitrophe de Livry-Gargan, à dominante pavillonnaire, où l'on trouve à la fois des maisons familiales anciennes et des lotissements des années 90-2000. Zone termites, elle requiert ce diagnostic obligatoire pour toute vente. Nos interventions y sont rapides et sans surcoût de déplacement.",
+    neighborhoods: ["Centre", "Fort de Vaujours", "Marais", "Notre-Dame"],
+    properties:
+      "Pavillons, maisons individuelles, lotissements récents — DPE, termites et électricité systématiques.",
+    focus:
+      "Ancien site du Fort de Vaujours : nous connaissons les spécificités environnementales locales (ERP renforcé).",
+  },
+  {
+    slug: "villepinte",
+    name: "Villepinte",
+    postalCode: "93420",
+    department: "Seine-Saint-Denis",
+    departmentCode: "93",
+    distanceKm: 7,
+    population: "37 000 habitants",
+    intro:
+      "Diagnostiqueur immobilier à Villepinte : DIAG VERITAS réalise sous 48h l'ensemble des diagnostics obligatoires vente et location — DPE, amiante, plomb, gaz, électricité, ERP.",
+    context:
+      "Villepinte présente un parc immobilier diversifié : pavillons du Vieux Pays, grands ensembles du Parc de la Noue, résidences récentes proches du parc des expositions. Les copropriétés d'avant 1997 impliquent un diagnostic amiante systématique, et le DPE est incontournable sur l'ensemble du parc.",
+    neighborhoods: ["Vieux Pays", "Parc de la Noue", "Centre-ville", "Fontaine Mallet"],
+    properties:
+      "Pavillons, grands ensembles, résidences récentes — DPE, amiante et Loi Carrez récurrents.",
+    focus:
+      "Nombreuses copropriétés années 70-80 : le repérage amiante est quasi systématique avant vente.",
+  },
+  {
+    slug: "le-blanc-mesnil",
+    name: "Le Blanc-Mesnil",
+    postalCode: "93150",
+    department: "Seine-Saint-Denis",
+    departmentCode: "93",
+    distanceKm: 6,
+    population: "58 000 habitants",
+    intro:
+      "DIAG VERITAS, diagnostiqueur immobilier au Blanc-Mesnil. DPE, amiante, plomb, électricité, gaz et ERP réalisés par un professionnel certifié Bureau Veritas.",
+    context:
+      "Le Blanc-Mesnil est l'une des grandes villes du nord du 93. Le bâti mêle grands ensembles (Tilleuls, Bel-Air), pavillons de banlieue (Musiciens, Pont-Yblon) et copropriétés récentes. Nous intervenons pour les particuliers, agences et syndics. Le DPE et l'amiante sont notre quotidien sur la commune.",
+    neighborhoods: ["Centre", "Tilleuls", "Musiciens", "Pont-Yblon", "Bel-Air"],
+    properties:
+      "Grands ensembles, pavillons, copropriétés — DPE, amiante et Loi Carrez récurrents.",
+    focus:
+      "Grands ensembles d'après-guerre : diagnostics amiante et DPE collectifs (PPPT) sont notre spécialité.",
+  },
+  {
+    slug: "claye-souilly",
+    name: "Claye-Souilly",
+    postalCode: "77410",
+    department: "Seine-et-Marne",
+    departmentCode: "77",
+    distanceKm: 12,
+    population: "12 500 habitants",
+    intro:
+      "Diagnostiqueur immobilier à Claye-Souilly (77) : DIAG VERITAS intervient sous 48h pour vos diagnostics obligatoires. Tarifs transparents, rapports certifiés.",
+    context:
+      "Claye-Souilly est un pôle résidentiel dynamique du 77, en pleine expansion. Le parc immobilier associe maisons anciennes du centre-bourg, pavillons familiaux et grands lotissements récents (Bois-Fleuri, Val Guermantes). Le DPE, la Loi Carrez et l'électricité y sont particulièrement demandés.",
+    neighborhoods: ["Centre-bourg", "Bois-Fleuri", "Val Guermantes", "Souilly"],
+    properties:
+      "Pavillons récents, maisons anciennes, copropriétés — DPE et Loi Carrez fréquents.",
+    focus:
+      "Marché en tension : nous garantissons un devis sous 24h et une intervention sous 48h pour ne pas retarder votre vente.",
+  },
+  {
+    slug: "paris",
+    name: "Paris",
+    postalCode: "75000",
+    department: "Paris",
+    departmentCode: "75",
+    distanceKm: 15,
+    population: "2 100 000 habitants",
+    intro:
+      "Diagnostiqueur immobilier à Paris : DIAG VERITAS intervient dans tous les arrondissements pour vos ventes et locations. DPE, amiante, plomb, électricité, gaz, ERP, Loi Carrez et Loi Boutin.",
+    context:
+      "Paris concentre l'essentiel des enjeux du diagnostic immobilier : bâti largement antérieur à 1949 (CREP plomb quasi systématique), immeubles haussmanniens à structure amiantée, copropriétés soumises au DPE collectif et au PPPT, mesurages Loi Carrez incontournables. Nous intervenons dans tous les arrondissements, avec une expertise particulière pour les copropriétés parisiennes.",
+    neighborhoods: ["1er au 20e arrondissement", "Marais", "Batignolles", "Belleville", "Passy", "Latin"],
+    properties:
+      "Immeubles haussmanniens, copropriétés anciennes et récentes, hôtels particuliers — plomb, amiante, DPE et Carrez systématiques.",
+    focus:
+      "Spécialistes des copropriétés parisiennes : nous produisons DPE collectifs, PPPT et DTG conformes à la loi Climat & Résilience.",
+  },
+  {
+    slug: "crepy-en-valois",
+    name: "Crépy-en-Valois",
+    postalCode: "60800",
+    department: "Oise",
+    departmentCode: "60",
+    distanceKm: 45,
+    population: "14 500 habitants",
+    intro:
+      "Diagnostiqueur immobilier à Crépy-en-Valois (60) : DIAG VERITAS intervient sur toute la commune pour vos diagnostics obligatoires vente et location.",
+    context:
+      "Crépy-en-Valois combine un centre historique riche (bâti souvent antérieur à 1949 impliquant CREP plomb) et des quartiers pavillonnaires récents (Bouillant, Sainte-Agathe). Le diagnostic amiante est courant sur le bâti d'avant 1997, notamment sur les toitures et les revêtements.",
+    neighborhoods: ["Centre historique", "Bouillant", "Sainte-Agathe", "Bois d'Argent"],
+    properties:
+      "Maisons de caractère, pavillons, copropriétés — plomb, amiante et DPE en priorité.",
+    focus:
+      "Bâti historique : nous produisons des rapports adaptés aux spécificités patrimoniales des biens du centre.",
+  },
+  {
+    slug: "pont-sainte-maxence",
+    name: "Pont-Sainte-Maxence",
+    postalCode: "60700",
+    department: "Oise",
+    departmentCode: "60",
+    distanceKm: 55,
+    population: "13 000 habitants",
+    intro:
+      "DIAG VERITAS, diagnostiqueur immobilier à Pont-Sainte-Maxence (60). Interventions DPE, amiante, plomb, électricité, gaz, ERP — devis sous 24h.",
+    context:
+      "Pont-Sainte-Maxence, ville des bords de l'Oise, associe centre ancien, quartiers pavillonnaires et copropriétés récentes. Le CREP plomb est courant sur le centre historique, l'électricité et le gaz sur les biens des années 60-80. Nous intervenons pour particuliers, agences et bailleurs.",
+    neighborhoods: ["Centre", "Sarron", "Les Écluses", "Berges de l'Oise"],
+    properties:
+      "Maisons anciennes, pavillons, copropriétés — plomb, DPE et électricité récurrents.",
+    focus:
+      "Zone inondable pour partie : l'ERP y est particulièrement attentif au risque PPRI.",
+  },
+  {
+    slug: "meru",
+    name: "Méru",
+    postalCode: "60110",
+    department: "Oise",
+    departmentCode: "60",
+    distanceKm: 55,
+    population: "14 500 habitants",
+    intro:
+      "Diagnostiqueur immobilier à Méru (60) : DIAG VERITAS couvre toute la commune pour vos diagnostics obligatoires vente et location.",
+    context:
+      "Méru, capitale historique de la tabletterie, présente un bâti mixte : centre ancien (plomb obligatoire), lotissements pavillonnaires récents, et anciens sites industriels reconvertis (amiante fréquente). Les diagnostics DPE, électricité et amiante sont particulièrement demandés.",
+    neighborhoods: ["Centre", "Nacre", "Corbeil", "Bois-Bougy"],
+    properties:
+      "Maisons anciennes, pavillons, anciens ateliers reconvertis — plomb, amiante et DPE prioritaires.",
+    focus:
+      "Anciens ateliers industriels reconvertis : le repérage amiante est incontournable avant toute vente ou travaux.",
+  },
 ];
 
 export function cityBySlug(slug: string): City | undefined {

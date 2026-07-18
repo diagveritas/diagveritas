@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, Check, Phone, ArrowLeft } from "lucide-react";
-import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { ArrowRight, Check, Phone, ArrowLeft, HelpCircle } from "lucide-react";
+import { CONTACT, DIAGNOSTICS, DIAGNOSTIC_FAQ } from "@/lib/diagnostics-data";
 
 export const Route = createFileRoute("/diagnostics/$slug")({
   loader: ({ params }) => {
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/diagnostics/$slug")({
       return { meta: [{ title: "Diagnostic introuvable — DIAG VERITAS" }, { name: "robots", content: "noindex" }] };
     }
     const { diag } = loaderData;
+    const faq = DIAGNOSTIC_FAQ[diag.slug] ?? [];
     return {
       meta: [
         { title: diag.seoTitle },
@@ -45,6 +46,20 @@ export const Route = createFileRoute("/diagnostics/$slug")({
             },
           }),
         },
+        ...(faq.length
+          ? [{
+              type: "application/ld+json" as const,
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faq.map((f) => ({
+                  "@type": "Question",
+                  name: f.q,
+                  acceptedAnswer: { "@type": "Answer", text: f.a },
+                })),
+              }),
+            }]
+          : []),
       ],
     };
   },
@@ -71,6 +86,7 @@ function DiagnosticDetail() {
   const { diag } = Route.useLoaderData();
   const Icon = diag.icon;
   const others = DIAGNOSTICS.filter((d) => d.slug !== diag.slug).slice(0, 3);
+  const faq = DIAGNOSTIC_FAQ[diag.slug] ?? [];
 
   return (
     <div>
@@ -151,6 +167,28 @@ function DiagnosticDetail() {
           </div>
         </div>
       </section>
+
+      {faq.length > 0 && (
+        <section className="border-t border-gold/15 bg-background">
+          <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+            <div className="text-xs uppercase tracking-[0.25em] text-gold">Questions fréquentes</div>
+            <h2 className="mt-3 font-display text-2xl text-foreground sm:text-3xl">
+              {diag.name.split("—")[0].trim()} — vos questions
+            </h2>
+            <dl className="mt-10 divide-y divide-gold/15 rounded-sm border border-gold/20 bg-card">
+              {faq.map((f) => (
+                <div key={f.q} className="p-6 sm:p-8">
+                  <dt className="flex items-start gap-3 font-display text-lg text-foreground">
+                    <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>{f.q}</span>
+                  </dt>
+                  <dd className="mt-3 pl-8 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
 
       <section className="border-t border-gold/15 bg-card/40">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
