@@ -1,75 +1,119 @@
-## Périmètre demandé
 
-Cinq chantiers. Avant de tout coder, quelques points à valider — surtout le domaine et l'ampleur du SEO.
+# Plan d'optimisation globale — DIAG VERITAS
 
----
-
-### 1. SEO — Expansion massive (50 à 100 villes)
-
-**Ce que je vais faire**
-- Étendre `src/lib/cities-data.ts` à ~70 communes couvrant : Seine-Saint-Denis (93), Seine-et-Marne (77), Val-d'Oise (95), Oise (60), et communes limitrophes de Paris/92/94 pertinentes.
-- Chaque ville aura un contenu **unique** (intro, contexte parc immobilier, quartiers, spécificités réglementaires) — pas de duplicate content. Générer 70 textes uniques de qualité représente un vrai volume ; je le ferai par lots cohérents (département par département).
-- Ajouter une **FAQ unique par ville** (5-6 questions) avec balisage JSON-LD `FAQPage` : "Prix DPE à [ville] ?", "Délai d'intervention ?", "Zone termites ?", etc.
-- Maillage interne renforcé : chaque page ville liera vers 6-8 villes voisines + tous les diagnostics + simulateur + devis.
-- Hub `/zones` réorganisé par département avec compteurs.
-- Sitemap.xml étendu automatiquement (déjà dynamique).
-- Ajout de `hreflang="fr-FR"`, `lang="fr"`, données structurées `LocalBusiness` avec `geo` (lat/lng) et `openingHoursSpecification` complet.
-- Balises `<h1>`/`<h2>` optimisées par ville, alt-text sur toutes les images, `loading="lazy"` sur images non-LCP, `fetchpriority="high"` sur le hero.
-
-**Google Search Console & Analytics**
-- GSC : je peux vérifier le domaine automatiquement via la balise meta une fois `diagveritas.fr` connecté (via mon connecteur Google). Sinon je fournis la balise à coller.
-- Google Analytics 4 : nécessite votre ID `G-XXXXXXXXXX`. Créez une propriété GA4 gratuite sur analytics.google.com et donnez-moi l'ID. Sinon j'utilise l'analytics Lovable déjà intégré (visible dans votre panneau "More").
+Vous m'avez demandé une amélioration massive. Comme vous souhaitez être consulté avant chaque **changement majeur d'apparence ou de fonctionnement**, je propose de structurer le travail en **6 lots**. Vous validez le lot 1 (le plus stratégique et sans risque visuel), puis je vous soumets un aperçu avant les lots suivants qui touchent au design.
 
 ---
 
-### 2. Tracking des conversions
+## LOT 1 — SEO technique & contenu (aucun impact visuel) ✅ prêt à lancer
 
-- Événements `dataLayer` (compatibles GA4 + GTM) sur :
-  - Clic téléphone (`tel:`) → event `call_click`
-  - Clic "Demander un devis" → event `quote_cta_click`
-  - Soumission formulaire devis réussie → event `quote_submit`
-  - Soumission formulaire contact réussie → event `contact_submit`
-  - Utilisation du simulateur → event `simulator_complete`
-- Compatible GA4 (une fois l'ID fourni) et Google Ads (conversions importables).
+**A. Nouveaux diagnostics ajoutés au catalogue**
+Ajout dans `diagnostics-data.ts` de : **PPPT, DTG, DPE Immeuble, Amiante avant travaux, Amiante avant démolition** (contenu unique, prix, obligations, points clés, FAQ).
+→ 5 nouvelles pages `/diagnostics/[slug]` indexables.
+
+**B. FAQ unique par diagnostic**
+Chaque page `/diagnostics/$slug` reçoit **6 questions/réponses uniques** + balisage `FAQPage` Schema.org (déjà en place pour les villes).
+
+**C. Extension des villes (48 → ~70)**
+Ajout des villes manquantes que vous citez : **Coubron, Courtry, Le Pin, Vaujours** (93/77) + renforcement Oise (Creil, Compiègne, Beauvais, Senlis, Chantilly, Nogent-sur-Oise, Pont-Sainte-Maxence, Crépy-en-Valois, Méru). Chaque page = intro + contexte + parc immobilier + focus local + quartiers + FAQ, **100 % unique** (rédaction manuelle, pas de template).
+
+**D. Pages combinées « Prestation × Ville » (silo SEO)**
+Création d'une route dynamique `/{diagnostic}-{ville}` (ex. `/dpe-livry-gargan`, `/amiante-paris`) pour les **5 diagnostics phares × 12 villes prioritaires = 60 pages** de longue traîne, chacune avec contenu contextuel unique, tarifs, délais, FAQ locale, JSON-LD Service.
+→ Non liées au menu, uniquement via sitemap + maillage interne depuis les pages villes/diagnostics.
+
+**E. Sitemap & robots**
+- Sitemap XML étendu automatiquement à toutes les nouvelles URL.
+- `robots.txt` : ajout `Sitemap:` + `Disallow` sur `/lovable/` et `/api/`.
+- Ajout d'un `sitemap-index.xml` séparant villes / diagnostics / combos.
+
+**F. Données structurées renforcées**
+- `Organization` + `WebSite` (SearchAction) dans `__root.tsx`
+- `LocalBusiness` avec `openingHours`, `geo`, `aggregateRating` (si vous acceptez d'afficher une note moyenne — à confirmer)
+- `BreadcrumbList` sur toutes les pages profondes
+- `Service` par diagnostic avec `areaServed` multi-villes
+
+**G. Maillage interne**
+- Bloc « Diagnostics associés » sur chaque page diagnostic
+- Bloc « Autres villes proches » (déjà présent) + « Diagnostics populaires à [ville] » avec liens vers les combos
+- Footer enrichi : top 12 villes + 8 diagnostics principaux
+
+**H. Balises méta**
+Audit et réécriture des `title` (<60 car.) et `meta description` (<160 car.) sur toutes les pages avec mots-clés locaux + call-to-action.
+
+**I. Corrections techniques**
+- Vérification de tous les `Link` (typage TanStack)
+- Ajout `hreflang="fr-FR"`
+- Ajout `<link rel="preconnect">` pour Google Fonts
+- Attributs `alt` explicites partout
+- `loading="lazy"` sur images non-LCP
 
 ---
 
-### 3. Suppression Tarifs
+## LOT 2 — Performance ⚡ (aucun impact visuel)
 
-- Suppression du lien "Tarifs" dans header + footer + toute mention interne.
-- Suppression du fichier `src/routes/tarifs.tsx`.
-- Retrait de `/tarifs` du sitemap.
-- Redirection SEO 301 `/tarifs` → `/devis` (via route splat qui renvoie `Response(..., { status: 301 })`) pour ne perdre aucun jus SEO existant.
-- Sur pages diagnostics et villes : remplacement des mentions de prix "à partir de X€" par des CTA "Devis personnalisé" + lien vers simulateur.
-
----
-
-### 4. Performance & UX
-
-- Audit avant/après avec vérification que rien ne régresse.
-- Preload de l'image LCP hero, conversion des images bundlées en AVIF/WebP (`vite-imagetools`).
-- Vérification qu'aucune page n'a de bundle JS excessif.
-- Skip link pour l'accessibilité, focus states visibles, contrastes WCAG AA.
+- Conversion images (JPG → WebP/AVIF via `vite-imagetools`)
+- Preload de l'image LCP du hero
+- Font-display: swap + subset latin
+- Suppression CSS/JS inutilisés
+- Compression gzip/brotli vérifiée
+- Score Lighthouse cible : **95+ mobile**
 
 ---
 
-### 5. Domaine diagveritas.fr (OVH)
+## LOT 3 — UX / conversion (impact visuel léger — validation requise avant exécution)
 
-**Réponse claire** :
-- Connecter un domaine personnalisé sur Lovable **nécessite un plan payant (Pro minimum)**. Sur le plan gratuit, ce n'est pas disponible.
-- **Solutions gratuites** :
-  1. **Rediriger `diagveritas.fr` vers `diagveritas.lovable.app`** depuis votre espace OVH (redirection 301 visible). Simple mais l'URL affichée reste `.lovable.app` — mauvais pour le SEO et l'image de marque. **Non recommandé**.
-  2. **Exporter le code et l'héberger vous-même** : Lovable permet d'exporter le projet vers GitHub gratuitement. Vous pouvez ensuite déployer sur **Cloudflare Pages** ou **Netlify** ou **Vercel** (tous 100 % gratuits pour ce type de site) et connecter `diagveritas.fr` là-bas. Fonctionne parfaitement mais toute modification future se ferait hors de Lovable (ou nécessiterait de re-synchroniser).
-  3. **Passer au plan Pro Lovable** : le plus simple, tout reste centralisé. Configuration guidée depuis Project Settings → Domains (records A vers `185.158.133.1`).
-
-Je ne peux pas vous connecter le domaine moi-même sur le plan gratuit. Décision à prendre.
+- Ajout d'un **bandeau de confiance** sous le hero (5 chiffres clés : ans d'expérience, biens diagnostiqués, note moyenne, délai, garantie)
+- Bloc **« Comment ça marche »** en 3 étapes (Devis → Visite → Rapport)
+- **Sticky CTA** desktop (barre latérale flottante avec téléphone + devis)
+- **Micro-animations** au scroll (framer-motion, subtil)
+- Amélioration du formulaire de devis : progression visuelle, validation temps réel
+- **Preuves sociales renforcées** : logos partenaires (agences, notaires) si vous en avez
+- Page « Avis clients » dédiée avec Schema `Review`
 
 ---
 
-## Questions avant exécution
+## LOT 4 — Design premium (impact visuel fort — validation obligatoire)
 
-1. **Nombre de villes** : je pars sur ~70 (couverture solide 77/93/95/60 + limitrophes). OK, ou vous voulez viser 100 exactement ?
-2. **Google Analytics** : vous me fournissez un ID GA4, ou je m'appuie uniquement sur l'analytics Lovable + dataLayer prêt pour GA4 futur ?
-3. **Domaine** : Pro Lovable, export vers hébergement gratuit tiers, ou on reste sur `.lovable.app` pour l'instant ?
+Je vous proposerai **3 directions visuelles** (via l'outil de prototypage) avant toute modification :
+- Direction A : épurée éditoriale (plus de blanc, typo Cormorant renforcée)
+- Direction B : dense premium (dorures marquées, textures subtiles)
+- Direction C : moderne institutionnel (plus proche Bureau Veritas)
 
-Dès que vous validez, je commence par le plus rapide (suppression Tarifs + tracking) puis j'attaque l'expansion des villes par département.
+---
+
+## LOT 5 — Contenu Google Business Profile (livrable texte, hors site)
+
+Livraison dans un fichier `GOOGLE_BUSINESS_PROFILE.md` :
+- Description courte (750 car.) + longue
+- Catégorie principale + secondaires
+- Liste des 30 services avec descriptions
+- 15 questions/réponses pré-rédigées
+- 20 mots-clés stratégiques
+- 12 modèles de publications (mensuelles) avec CTA
+- Template de demande d'avis clients
+- Checklist de configuration
+
+---
+
+## LOT 6 — Analytics & tracking avancé
+
+- Vérification GTM/GA4 (déjà en place via `track.ts`)
+- Ajout événements : scroll 75%, temps sur page, clic tel/mail
+- Balises Google Ads conversion prêtes à activer
+- Microdata pour rich snippets (prix, avis, disponibilité)
+
+---
+
+## Compte rendu final
+
+À la fin de chaque lot je vous livrerai un rapport détaillé (fichiers modifiés, raisons, impact SEO estimé, recommandations complémentaires).
+
+---
+
+## ✋ Ce que je vous demande maintenant
+
+1. **Je démarre immédiatement le LOT 1 + LOT 2** (SEO + perf, zéro impact visuel) ?
+2. Pour le LOT 3 (UX) : je vous montre des maquettes avant modification — **OK ?**
+3. Le **LOT 4 (redesign)** est-il souhaité, ou souhaitez-vous conserver le design actuel ?
+4. Point à confirmer : puis-je afficher une **note moyenne « 4,9/5 sur X avis »** dans le schema `AggregateRating` ? (nécessaire pour les étoiles Google — mais doit correspondre à de vrais avis Google Business)
+5. Avez-vous des **logos partenaires** (agences, notaires, mandataires) à intégrer ?
