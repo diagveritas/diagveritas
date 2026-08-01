@@ -80,24 +80,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS" },
+      { title: "Diagnostic immobilier Île-de-France | DIAG VERITAS" },
       {
         name: "description",
         content:
-          "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit.",
+          "Diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan : DPE, amiante, plomb, gaz, électricité, ERP. Devis gratuit sous 24 h.",
       },
       { name: "author", content: "DIAG VERITAS" },
-      { property: "og:title", content: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS" },
+      { property: "og:title", content: "Diagnostic immobilier Île-de-France | DIAG VERITAS" },
       {
         property: "og:description",
         content:
-          "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit.",
+          "Diagnostiqueur certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, gaz, électricité. Devis gratuit sous 24 h.",
       },
       { property: "og:site_name", content: "DIAG VERITAS" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Diagnostic immobilier Livry-Gargan, Seine-Saint-Denis & Île-de-France | DIAG VERITAS" },
-      { name: "twitter:description", content: "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit." },
+      { name: "twitter:title", content: "Diagnostic immobilier Île-de-France | DIAG VERITAS" },
+      { name: "twitter:description", content: "Diagnostiqueur certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, gaz, électricité. Devis gratuit sous 24 h." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Fn9TM3HyYPaZr71XAIETM0iPwRQ2/social-images/social-1783969386076-file_00000000d61871fdac69d623da5a6388.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Fn9TM3HyYPaZr71XAIETM0iPwRQ2/social-images/social-1783969386076-file_00000000d61871fdac69d623da5a6388.webp" },
     ],
@@ -209,8 +210,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <a
+        href="#contenu"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-gold focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Aller au contenu principal
+      </a>
       <SiteHeader />
-      <main>
+      <main id="contenu">
         <Outlet />
       </main>
       <SiteFooter />

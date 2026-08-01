@@ -42,6 +42,14 @@ export function SiteFooter() {
                   Voir tous les diagnostics →
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/guides/prix-diagnostic-immobilier"
+                  className="transition-colors hover:text-gold"
+                >
+                  Guide : prix d'un diagnostic →
+                </Link>
+              </li>
             </ul>
           </div>
 

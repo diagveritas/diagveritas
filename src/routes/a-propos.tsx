@@ -5,11 +5,11 @@ import { SectionHeading } from "@/components/section-heading";
 export const Route = createFileRoute("/a-propos")({
   head: () => ({
     meta: [
-      { title: "À propos — Diagnostiqueur immobilier certifié à Livry-Gargan | DIAG VERITAS" },
+      { title: "À propos — Diagnostiqueur certifié 93 | DIAG VERITAS" },
       {
         name: "description",
         content:
-          "DIAG VERITAS, entreprise de diagnostics immobiliers basée à Livry-Gargan (93). Diagnostiqueur certifié Bureau Veritas, assurance RC Pro, plus de 10 ans d'expérience en Île-de-France et dans l'Oise.",
+          "DIAG VERITAS, diagnostics immobiliers à Livry-Gargan (93) : diagnostiqueur certifié Bureau Veritas, assurance RC Pro, plus de 10 ans d'expérience.",
       },
       { property: "og:title", content: "À propos de DIAG VERITAS" },
       {

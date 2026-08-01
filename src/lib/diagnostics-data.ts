@@ -43,7 +43,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Recommandations de travaux d'amélioration chiffrées",
       "Validité : 10 ans (sauf DPE réalisés avant 2021)",
     ],
-    seoTitle: "DPE Seine-Saint-Denis & Île-de-France — Diagnostic Performance Énergétique | DIAG VERITAS",
+    seoTitle: "DPE Seine-Saint-Denis & Île-de-France | DIAG VERITAS",
     seoDescription:
       "DPE certifié à Livry-Gargan, en Seine-Saint-Denis, Île-de-France et Oise. Diagnostiqueur certifié Bureau Veritas, résultats rapides, à partir de 99€.",
   },
@@ -63,7 +63,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Obligatoire pour toute vente de bien construit avant le 01/07/1997",
       "Validité illimitée en l'absence d'amiante",
     ],
-    seoTitle: "Diagnostic Amiante Livry-Gargan & Île-de-France | DIAG VERITAS",
+    seoTitle: "Diagnostic amiante Livry-Gargan (93) | DIAG VERITAS",
     seoDescription:
       "Repérage amiante avant vente ou travaux. Diagnostiqueur certifié à Livry-Gargan, intervention en Seine-Saint-Denis, Île-de-France et Oise. Devis rapide.",
   },
@@ -83,7 +83,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Obligatoire pour tout bien construit avant 1949",
       "Validité 1 an en vente, 6 ans en location",
     ],
-    seoTitle: "Diagnostic Plomb (CREP) Livry-Gargan & Île-de-France | DIAG VERITAS",
+    seoTitle: "Diagnostic plomb CREP Île-de-France | DIAG VERITAS",
     seoDescription:
       "Constat de risque d'exposition au plomb (CREP) pour vente ou location. Diagnostiqueur certifié en Seine-Saint-Denis, Île-de-France et Oise.",
   },
@@ -103,7 +103,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Rapport avec anomalies classées par ordre d'urgence",
       "Validité 3 ans en vente, 6 ans en location",
     ],
-    seoTitle: "Diagnostic Électricité Livry-Gargan & Île-de-France | DIAG VERITAS",
+    seoTitle: "Diagnostic électricité Île-de-France | DIAG VERITAS",
     seoDescription:
       "Diagnostic électrique certifié pour vente et location. Intervention rapide à Livry-Gargan, en Seine-Saint-Denis, Île-de-France et Oise.",
   },
@@ -123,7 +123,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Détection des anomalies présentant un danger grave et immédiat",
       "Validité 3 ans en vente, 6 ans en location",
     ],
-    seoTitle: "Diagnostic Gaz Livry-Gargan & Île-de-France | DIAG VERITAS",
+    seoTitle: "Diagnostic gaz Livry-Gargan (93) | DIAG VERITAS",
     seoDescription:
       "Diagnostic gaz certifié pour vente ou location. Diagnostiqueur immobilier à Livry-Gargan, intervention en Seine-Saint-Denis, Île-de-France et Oise.",
   },
@@ -143,7 +143,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Rapport détaillé conforme à la norme NF P 03-201",
       "Validité 6 mois",
     ],
-    seoTitle: "Diagnostic Termites Île-de-France & Oise | DIAG VERITAS",
+    seoTitle: "Diagnostic termites Île-de-France | DIAG VERITAS",
     seoDescription:
       "Diagnostic termites en zone préfectorale à risque. Intervention à Livry-Gargan, en Seine-Saint-Denis, Île-de-France et Oise. Diagnostiqueur certifié.",
   },
@@ -163,7 +163,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Obligatoire dans toutes les communes concernées",
       "Validité 6 mois",
     ],
-    seoTitle: "ERP — État des Risques et Pollutions Île-de-France & Oise | DIAG VERITAS",
+    seoTitle: "ERP état des risques et pollutions | DIAG VERITAS",
     seoDescription:
       "État des Risques et Pollutions (ERP) réalisé rapidement pour vente ou location. Intervention en Seine-Saint-Denis, Île-de-France et Oise.",
   },
@@ -183,7 +183,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Attestation détaillée pièce par pièce",
       "Validité illimitée sans travaux modifiant la surface",
     ],
-    seoTitle: "Loi Boutin — Surface habitable Livry-Gargan & Île-de-France | DIAG VERITAS",
+    seoTitle: "Loi Boutin surface habitable | DIAG VERITAS",
     seoDescription:
       "Mesurage Loi Boutin pour location non meublée. Diagnostiqueur immobilier certifié à Livry-Gargan, Seine-Saint-Denis, Île-de-France et Oise.",
   },
@@ -203,7 +203,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Attestation opposable en cas de litige",
       "Validité illimitée sans travaux modifiant la surface",
     ],
-    seoTitle: "Loi Carrez — Surface privative Livry-Gargan & Île-de-France | DIAG VERITAS",
+    seoTitle: "Loi Carrez surface privative | DIAG VERITAS",
     seoDescription:
       "Mesurage Loi Carrez pour vente en copropriété. Diagnostiqueur certifié Bureau Veritas à Livry-Gargan, Seine-Saint-Denis, Île-de-France et Oise.",
   },
@@ -223,9 +223,9 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Échéancier de mise en œuvre et priorisation énergétique",
       "Vote en assemblée générale des copropriétaires",
     ],
-    seoTitle: "PPPT copropriété Île-de-France & Oise — Plan Pluriannuel de Travaux | DIAG VERITAS",
+    seoTitle: "PPPT copropriété Île-de-France | DIAG VERITAS",
     seoDescription:
-      "PPPT loi Climat & Résilience pour votre copropriété. Diagnostiqueur certifié à Livry-Gargan, intervention Seine-Saint-Denis, Île-de-France et Oise. Devis rapide.",
+      "PPPT loi Climat & Résilience pour votre copropriété. Diagnostiqueur certifié à Livry-Gargan, intervention en Île-de-France et Oise. Devis rapide.",
   },
   {
     slug: "dtg",
@@ -243,7 +243,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Diagnostic de performance énergétique de l'immeuble",
       "Évaluation des travaux à prévoir dans les 10 ans",
     ],
-    seoTitle: "DTG — Diagnostic Technique Global copropriété | DIAG VERITAS Île-de-France",
+    seoTitle: "DTG diagnostic technique global | DIAG VERITAS",
     seoDescription:
       "DTG pour copropriété en Île-de-France et Oise : analyse complète du bâti, équipements et travaux à prévoir. Diagnostiqueur certifié Bureau Veritas.",
   },
@@ -263,7 +263,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Recommandations de travaux à l'échelle de la copropriété",
       "Base indispensable au PPPT et au plan de rénovation",
     ],
-    seoTitle: "DPE Immeuble collectif copropriété | DIAG VERITAS Île-de-France & Oise",
+    seoTitle: "DPE immeuble collectif copropriété | DIAG VERITAS",
     seoDescription:
       "DPE collectif obligatoire pour copropriétés en Île-de-France et Oise. Diagnostiqueur certifié Bureau Veritas — méthode 3CL-DPE 2021, rapport rapide.",
   },
@@ -283,7 +283,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Rapport avec cartographie et localisation précise des MPCA",
       "Obligatoire avant toute rénovation, désamiantage ou intervention",
     ],
-    seoTitle: "RAAT — Repérage Amiante Avant Travaux Île-de-France | DIAG VERITAS",
+    seoTitle: "Repérage amiante avant travaux | DIAG VERITAS",
     seoDescription:
       "Repérage Amiante Avant Travaux (RAAT) certifié en Île-de-France et Oise. Norme NF X 46-020, laboratoire COFRAC, rapport rapide. Devis gratuit.",
   },
@@ -303,7 +303,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
       "Prélèvements analysés en laboratoire COFRAC",
       "Rapport détaillé nécessaire au dossier de démolition",
     ],
-    seoTitle: "RAAD — Repérage Amiante Avant Démolition Île-de-France | DIAG VERITAS",
+    seoTitle: "Repérage amiante avant démolition | DIAG VERITAS",
     seoDescription:
       "Repérage Amiante Avant Démolition (RAAD) certifié en Île-de-France et Oise. Norme NF X 46-020, exhaustif, rapport conforme. Devis rapide.",
   },

@@ -18,6 +18,7 @@ import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesPrixDiagnosticImmobilierRouteImport } from './routes/guides.prix-diagnostic-immobilier'
 import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
 import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
 
@@ -66,6 +67,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesPrixDiagnosticImmobilierRoute =
+  GuidesPrixDiagnosticImmobilierRouteImport.update({
+    id: '/guides/prix-diagnostic-immobilier',
+    path: '/guides/prix-diagnostic-immobilier',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DiagnostiqueurImmobilierVilleRoute =
   DiagnostiqueurImmobilierVilleRouteImport.update({
     id: '/diagnostiqueur-immobilier/$ville',
@@ -90,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
+  '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,6 +111,7 @@ export interface FileRoutesByTo {
   '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
+  '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -117,6 +126,7 @@ export interface FileRoutesById {
   '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
+  '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/zones'
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
+    | '/guides/prix-diagnostic-immobilier'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/zones'
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
+    | '/guides/prix-diagnostic-immobilier'
   id:
     | '__root__'
     | '/'
@@ -158,6 +170,7 @@ export interface FileRouteTypes {
     | '/zones'
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
+    | '/guides/prix-diagnostic-immobilier'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +184,7 @@ export interface RootRouteChildren {
   TarifsRoute: typeof TarifsRoute
   ZonesRoute: typeof ZonesRoute
   DiagnostiqueurImmobilierVilleRoute: typeof DiagnostiqueurImmobilierVilleRoute
+  GuidesPrixDiagnosticImmobilierRoute: typeof GuidesPrixDiagnosticImmobilierRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -238,6 +252,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/prix-diagnostic-immobilier': {
+      id: '/guides/prix-diagnostic-immobilier'
+      path: '/guides/prix-diagnostic-immobilier'
+      fullPath: '/guides/prix-diagnostic-immobilier'
+      preLoaderRoute: typeof GuidesPrixDiagnosticImmobilierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostiqueur-immobilier/$ville': {
       id: '/diagnostiqueur-immobilier/$ville'
       path: '/diagnostiqueur-immobilier/$ville'
@@ -278,17 +299,8 @@ const rootRouteChildren: RootRouteChildren = {
   TarifsRoute: TarifsRoute,
   ZonesRoute: ZonesRoute,
   DiagnostiqueurImmobilierVilleRoute: DiagnostiqueurImmobilierVilleRoute,
+  GuidesPrixDiagnosticImmobilierRoute: GuidesPrixDiagnosticImmobilierRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

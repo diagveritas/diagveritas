@@ -7,16 +7,16 @@ export const Route = createFileRoute("/diagnostics")({
   head: () => ({
     meta: [
       {
-        title: "Diagnostics immobiliers Île-de-France & Oise — DPE, amiante, plomb… | DIAG VERITAS",
+        title: "Diagnostics immobiliers obligatoires | DIAG VERITAS",
       },
       {
         name: "description",
         content:
-          "Tous les diagnostics immobiliers obligatoires réalisés par DIAG VERITAS à Livry-Gargan et en Île-de-France : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez.",
+          "DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin et Loi Carrez en Île-de-France et Oise. Diagnostiqueur certifié Bureau Veritas.",
       },
       {
         property: "og:title",
-        content: "Diagnostics immobiliers en Île-de-France & Oise — DIAG VERITAS",
+        content: "Diagnostics immobiliers obligatoires — DIAG VERITAS",
       },
       {
         property: "og:description",

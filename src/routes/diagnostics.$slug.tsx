@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check, Phone, ArrowLeft, HelpCircle } from "lucide-react";
 import { CONTACT, DIAGNOSTICS, DIAGNOSTIC_FAQ } from "@/lib/diagnostics-data";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/breadcrumbs";
 
 export const Route = createFileRoute("/diagnostics/$slug")({
   loader: ({ params }) => {
@@ -60,6 +61,16 @@ export const Route = createFileRoute("/diagnostics/$slug")({
               }),
             }]
           : []),
+        {
+          type: "application/ld+json" as const,
+          children: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Accueil", href: "/" },
+              { name: "Diagnostics", href: "/diagnostics" },
+              { name: diag.name.split("—")[0].trim() },
+            ]),
+          ),
+        },
       ],
     };
   },
@@ -92,12 +103,13 @@ function DiagnosticDetail() {
     <div>
       <section className="border-b border-gold/15 bg-card/40">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-          <Link
-            to="/diagnostics"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold hover:opacity-80"
-          >
-            <ArrowLeft className="h-3 w-3" /> Tous les diagnostics
-          </Link>
+          <Breadcrumbs
+            items={[
+              { name: "Accueil", href: "/" },
+              { name: "Diagnostics", href: "/diagnostics" },
+              { name: diag.name.split("—")[0].trim() },
+            ]}
+          />
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-sm border border-gold/50 text-gold">
               <Icon className="h-7 w-7" />

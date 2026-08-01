@@ -166,9 +166,14 @@ function Step({
         <div>
           <QuestionTitle title="Année de construction du bien" subtitle="Elle détermine les diagnostics amiante et plomb." />
           <div className="mx-auto mt-8 max-w-xs">
+            <label htmlFor="sim-year" className="sr-only">
+              Année de construction du bien
+            </label>
             <input
+              id="sim-year"
               type="number"
               inputMode="numeric"
+              aria-describedby="sim-year-help"
               min={1800}
               max={CURRENT_YEAR}
               placeholder="ex. 1978"
@@ -179,7 +184,7 @@ function Step({
               }}
               className="w-full rounded-sm border border-gold/40 bg-background px-4 py-4 text-center font-display text-3xl text-foreground focus:border-gold focus:outline-none"
             />
-            <p className="mt-3 text-center text-xs text-muted-foreground">
+            <p id="sim-year-help" className="mt-3 text-center text-xs text-muted-foreground">
               Entre 1800 et {CURRENT_YEAR}
             </p>
           </div>

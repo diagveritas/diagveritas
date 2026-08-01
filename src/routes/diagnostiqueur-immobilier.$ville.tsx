@@ -53,8 +53,8 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
     }
     const { city } = loaderData;
     const url = `${SITE_URL}/diagnostiqueur-immobilier/${params.ville}`;
-    const title = `Diagnostiqueur immobilier ${city.name} (${city.postalCode}) — DPE, amiante, plomb | DIAG VERITAS`;
-    const description = `Diagnostic immobilier à ${city.name} : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin & Carrez. Diagnostiqueur certifié Bureau Veritas, intervention sous 48h. Devis gratuit.`;
+    const title = `Diagnostiqueur immobilier ${city.name} | DIAG VERITAS`;
+    const description = `DPE, amiante, plomb, électricité, gaz et ERP à ${city.name} : diagnostiqueur certifié Bureau Veritas, intervention sous 48 h, devis gratuit.`;
     const faqs = cityFaq(city.name);
 
     return {
