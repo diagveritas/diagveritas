@@ -22,9 +22,9 @@ export const Route = createFileRoute("/diagnostics")({
         property: "og:description",
         content: "9 diagnostics réglementaires réalisés en une seule visite. Devis gratuit.",
       },
-      { property: "og:url", content: "/diagnostics" },
+      { property: "og:url", content: "https://diagveritas.fr/diagnostics" },
     ],
-    links: [{ rel: "canonical", href: "/diagnostics" }],
+    links: [{ rel: "canonical", href: "https://diagveritas.fr/diagnostics" }],
   }),
   component: DiagnosticsLayout,
 });

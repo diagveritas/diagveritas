@@ -20,9 +20,9 @@ export const Route = createFileRoute("/devis")({
         property: "og:description",
         content: "Devis gratuit et réponse en moins de 24h.",
       },
-      { property: "og:url", content: "/devis" },
+      { property: "og:url", content: "https://diagveritas.fr/devis" },
     ],
-    links: [{ rel: "canonical", href: "/devis" }],
+    links: [{ rel: "canonical", href: "https://diagveritas.fr/devis" }],
   }),
   component: DevisPage,
 });

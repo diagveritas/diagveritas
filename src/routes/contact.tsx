@@ -20,9 +20,9 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "Diagnostiqueur immobilier à Livry-Gargan — Île-de-France & Oise.",
       },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://diagveritas.fr/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://diagveritas.fr/contact" }],
   }),
   component: ContactPage,
 });

@@ -10,7 +10,7 @@ Copiez-collez chaque bloc dans votre fiche Google Business (business.google.com)
 - **Zone desservie** : Seine-Saint-Denis (93), Seine-et-Marne (77), Val-d'Oise (95), Paris (75), Oise (60)
 - **Téléphone** : 06 72 29 73 62
 - **Email** : contact.diagveritas@gmail.com
-- **Site web** : https://diagveritas.lovable.app
+- **Site web** : https://diagveritas.fr
 - **Horaires** : Lun–Sam 8h–19h — Dimanche fermé
 
 ## 2. Description courte (750 caractères)

@@ -3,7 +3,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CITIES } from "@/lib/cities-data";
 
-const SITE_URL = "https://diagveritas.lovable.app";
+const SITE_URL = "https://diagveritas.fr";
 
 export const Route = createFileRoute("/zones")({
   head: () => {

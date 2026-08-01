@@ -20,10 +20,10 @@ export const Route = createFileRoute("/diagnostics/$slug")({
         { name: "description", content: diag.seoDescription },
         { property: "og:title", content: diag.seoTitle },
         { property: "og:description", content: diag.seoDescription },
-        { property: "og:url", content: `/diagnostics/${diag.slug}` },
+        { property: "og:url", content: `https://diagveritas.fr/diagnostics/${diag.slug}` },
         { property: "og:type", content: "article" },
       ],
-      links: [{ rel: "canonical", href: `/diagnostics/${diag.slug}` }],
+      links: [{ rel: "canonical", href: `https://diagveritas.fr/diagnostics/${diag.slug}` }],
       scripts: [
         {
           type: "application/ld+json",

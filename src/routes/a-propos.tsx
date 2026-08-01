@@ -16,9 +16,9 @@ export const Route = createFileRoute("/a-propos")({
         property: "og:description",
         content: "Certifications, assurances et engagements de votre diagnostiqueur immobilier.",
       },
-      { property: "og:url", content: "/a-propos" },
+      { property: "og:url", content: "https://diagveritas.fr/a-propos" },
     ],
-    links: [{ rel: "canonical", href: "/a-propos" }],
+    links: [{ rel: "canonical", href: "https://diagveritas.fr/a-propos" }],
   }),
   component: AboutPage,
 });

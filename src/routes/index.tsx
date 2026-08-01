@@ -27,9 +27,9 @@ export const Route = createFileRoute("/")({
         content:
           "DIAG VERITAS, diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez en Île-de-France et Oise. Devis gratuit.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://diagveritas.fr/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://diagveritas.fr/" }],
   }),
   component: Index,
 });

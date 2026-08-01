@@ -3,7 +3,7 @@ import type {} from "@tanstack/react-start";
 import { DIAGNOSTICS } from "@/lib/diagnostics-data";
 import { CITIES } from "@/lib/cities-data";
 
-const BASE_URL = "https://diagveritas.lovable.app";
+const BASE_URL = "https://diagveritas.fr";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
