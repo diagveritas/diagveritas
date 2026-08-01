@@ -210,8 +210,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <a
+        href="#contenu"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-gold focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Aller au contenu principal
+      </a>
       <SiteHeader />
-      <main>
+      <main id="contenu">
         <Outlet />
       </main>
       <SiteFooter />

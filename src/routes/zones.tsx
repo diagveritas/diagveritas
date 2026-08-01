@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { CITIES } from "@/lib/cities-data";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/breadcrumbs";
 
 const SITE_URL = "https://diagveritas.fr";
 
@@ -20,6 +21,17 @@ export const Route = createFileRoute("/zones")({
         { property: "og:url", content: url },
       ],
       links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Accueil", href: "/" },
+              { name: "Zones d'intervention" },
+            ]),
+          ),
+        },
+      ],
     };
   },
   component: ZonesPage,
@@ -35,7 +47,10 @@ function ZonesPage() {
     <div>
       <section className="border-b border-gold/20 bg-gradient-to-b from-card/60 to-background">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-4 py-1.5 text-xs uppercase tracking-[0.25em] text-gold">
+          <Breadcrumbs
+            items={[{ name: "Accueil", href: "/" }, { name: "Zones d'intervention" }]}
+          />
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/40 px-4 py-1.5 text-xs uppercase tracking-[0.25em] text-gold">
             <MapPin className="h-3.5 w-3.5" /> Zones d'intervention
           </div>
           <h1 className="mt-6 font-display text-4xl leading-tight text-foreground sm:text-5xl md:text-6xl">
