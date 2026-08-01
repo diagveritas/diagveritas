@@ -225,7 +225,7 @@ export const DIAGNOSTICS: Diagnostic[] = [
     ],
     seoTitle: "PPPT copropriété Île-de-France | DIAG VERITAS",
     seoDescription:
-      "PPPT loi Climat & Résilience pour votre copropriété. Diagnostiqueur certifié à Livry-Gargan, intervention Seine-Saint-Denis, Île-de-France et Oise. Devis rapide.",
+      "PPPT loi Climat & Résilience pour votre copropriété. Diagnostiqueur certifié à Livry-Gargan, intervention en Île-de-France et Oise. Devis rapide.",
   },
   {
     slug: "dtg",
