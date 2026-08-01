@@ -23,9 +23,9 @@ export const Route = createFileRoute("/simulateur")({
         content:
           "En 7 questions simples, identifiez les diagnostics obligatoires pour votre bien.",
       },
-      { property: "og:url", content: "/simulateur" },
+      { property: "og:url", content: "https://diagveritas.fr/simulateur" },
     ],
-    links: [{ rel: "canonical", href: "/simulateur" }],
+    links: [{ rel: "canonical", href: "https://diagveritas.fr/simulateur" }],
     scripts: [
       {
         type: "application/ld+json",

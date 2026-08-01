@@ -5,7 +5,7 @@ import { CITIES, cityBySlug } from "@/lib/cities-data";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
 import { trackCall, trackQuoteCta } from "@/lib/track";
 
-const SITE_URL = "https://diagveritas.lovable.app";
+const SITE_URL = "https://diagveritas.fr";
 
 function cityFaq(cityName: string) {
   return [
