@@ -206,10 +206,14 @@ function DevisPage() {
               <h3 className="font-display text-lg text-gold">Votre bien</h3>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-gold">
+                  <label
+                    htmlFor="devis-propertyType"
+                    className="block text-xs uppercase tracking-widest text-gold"
+                  >
                     Type de bien
                   </label>
                   <select
+                    id="devis-propertyType"
                     name="propertyType"
                     defaultValue=""
                     className="mt-2 w-full rounded-sm border border-gold/30 bg-background px-4 py-3 text-sm text-foreground focus:border-gold focus:outline-none"
@@ -260,10 +264,14 @@ function DevisPage() {
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gold">
+              <label
+                htmlFor="devis-message"
+                className="block text-xs uppercase tracking-widest text-gold"
+              >
                 Message (optionnel)
               </label>
               <textarea
+                id="devis-message"
                 name="message"
                 rows={4}
                 placeholder="Précisez vos délais, contraintes, etc."
@@ -309,15 +317,25 @@ function Field({
   error?: string;
   className?: string;
 }) {
+  const id = `devis-${name}`;
   return (
     <div className={className}>
-      <label className="block text-xs uppercase tracking-widest text-gold">{label}</label>
+      <label htmlFor={id} className="block text-xs uppercase tracking-widest text-gold">
+        {label}
+      </label>
       <input
+        id={id}
         name={name}
         type={type}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
         className="mt-2 w-full rounded-sm border border-gold/30 bg-background px-4 py-3 text-sm text-foreground focus:border-gold focus:outline-none"
       />
-      {error && <div className="mt-1 text-xs text-destructive">{error}</div>}
+      {error && (
+        <div id={`${id}-error`} className="mt-1 text-xs text-destructive">
+          {error}
+        </div>
+      )}
     </div>
   );
 }

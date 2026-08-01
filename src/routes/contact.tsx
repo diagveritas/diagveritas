@@ -225,10 +225,14 @@ function ContactPage() {
                 <Field label="Email" name="email" type="email" error={errors.email} />
                 <Field label="Téléphone" name="phone" type="tel" error={errors.phone} />
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-gold">
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-xs uppercase tracking-widest text-gold"
+                  >
                     Message
                   </label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     rows={5}
                     className="mt-2 w-full rounded-sm border border-gold/30 bg-background px-4 py-3 text-sm text-foreground focus:border-gold focus:outline-none"
@@ -272,15 +276,25 @@ function Field({
   type?: string;
   error?: string;
 }) {
+  const id = `contact-${name}`;
   return (
     <div>
-      <label className="block text-xs uppercase tracking-widest text-gold">{label}</label>
+      <label htmlFor={id} className="block text-xs uppercase tracking-widest text-gold">
+        {label}
+      </label>
       <input
+        id={id}
         name={name}
         type={type}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
         className="mt-2 w-full rounded-sm border border-gold/30 bg-background px-4 py-3 text-sm text-foreground focus:border-gold focus:outline-none"
       />
-      {error && <div className="mt-1 text-xs text-destructive">{error}</div>}
+      {error && (
+        <div id={`${id}-error`} className="mt-1 text-xs text-destructive">
+          {error}
+        </div>
+      )}
     </div>
   );
 }
