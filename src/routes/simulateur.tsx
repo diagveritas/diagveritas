@@ -6,17 +6,16 @@ export const Route = createFileRoute("/simulateur")({
   head: () => ({
     meta: [
       {
-        title:
-          "Simulateur — Quels diagnostics immobiliers sont obligatoires ? | DIAG VERITAS",
+        title: "Quels diagnostics sont obligatoires ? | DIAG VERITAS",
       },
       {
         name: "description",
         content:
-          "Simulateur gratuit : découvrez en 2 minutes les diagnostics immobiliers obligatoires pour votre vente ou location en Île-de-France et Oise. DPE, amiante, plomb, électricité, gaz, termites, Loi Boutin, Loi Carrez.",
+          "Simulateur gratuit : identifiez en 2 minutes les diagnostics immobiliers obligatoires pour votre vente ou location en Île-de-France et dans l'Oise.",
       },
       {
         property: "og:title",
-        content: "Simulateur diagnostics immobiliers obligatoires — DIAG VERITAS",
+        content: "Simulateur diagnostics obligatoires — DIAG VERITAS",
       },
       {
         property: "og:description",

@@ -8,9 +8,9 @@ const SITE_URL = "https://diagveritas.fr";
 export const Route = createFileRoute("/zones")({
   head: () => {
     const url = `${SITE_URL}/zones`;
-    const title = "Zones d'intervention — Diagnostiqueur immobilier Île-de-France & Oise | DIAG VERITAS";
+    const title = "Zones d'intervention Île-de-France | DIAG VERITAS";
     const description =
-      "Diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan et dans toute l'Île-de-France (93, 77) et l'Oise (60). Une page dédiée par ville : DPE, amiante, plomb, électricité, gaz, ERP.";
+      "Diagnostiqueur immobilier certifié à Livry-Gargan intervenant en Île-de-France (93, 77, 95) et dans l'Oise (60). Une page dédiée par commune.";
     return {
       meta: [
         { title },

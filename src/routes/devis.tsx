@@ -9,11 +9,11 @@ import { track } from "@/lib/track";
 export const Route = createFileRoute("/devis")({
   head: () => ({
     meta: [
-      { title: "Demande de devis — Diagnostic immobilier Île-de-France & Oise | DIAG VERITAS" },
+      { title: "Devis diagnostic immobilier gratuit | DIAG VERITAS" },
       {
         name: "description",
         content:
-          "Recevez votre devis diagnostic immobilier gratuit sous 24h. DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez à Livry-Gargan et Île-de-France.",
+          "Recevez votre devis diagnostic immobilier gratuit sous 24 h : DPE, amiante, plomb, électricité, gaz, ERP en Île-de-France et dans l'Oise.",
       },
       { property: "og:title", content: "Demande de devis — DIAG VERITAS" },
       {

@@ -88,6 +88,8 @@ function Index() {
             alt="Façade haussmannienne éclairée — DIAG VERITAS diagnostics immobiliers"
             width={1920}
             height={1280}
+            fetchPriority="high"
+            decoding="async"
             className="h-full w-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
