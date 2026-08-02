@@ -104,7 +104,18 @@ export function SiteFooter() {
         <div className="mt-14 gold-divider" />
         <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground sm:flex-row">
           <div>© {new Date().getFullYear()} DIAG VERITAS. Tous droits réservés.</div>
-          <div>SIRET & assurance RC Pro conformes à la législation.</div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link to="/mentions-legales" className="hover:text-gold">
+              Mentions légales
+            </Link>
+            <Link to="/simulateur" className="hover:text-gold">
+              Simulateur
+            </Link>
+            <Link to="/devis" className="hover:text-gold">
+              Demande de devis
+            </Link>
+            <span>SIRET &amp; assurance RC Pro conformes à la législation.</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -13,6 +13,7 @@ import { Route as ZonesRouteImport } from './routes/zones'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimulateurRouteImport } from './routes/simulateur'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as DiagnosticsRouteImport } from './routes/diagnostics'
 import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -41,6 +42,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SimulateurRoute = SimulateurRouteImport.update({
   id: '/simulateur',
   path: '/simulateur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticsRoute = DiagnosticsRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/mentions-legales'
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/contact'
     | '/devis'
+    | '/mentions-legales'
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/mentions-legales'
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DevisRoute: typeof DevisRoute
   DiagnosticsRoute: typeof DiagnosticsRouteWithChildren
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   SimulateurRoute: typeof SimulateurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TarifsRoute: typeof TarifsRoute
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/simulateur'
       fullPath: '/simulateur'
       preLoaderRoute: typeof SimulateurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostics': {
@@ -313,6 +333,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DevisRoute: DevisRoute,
   DiagnosticsRoute: DiagnosticsRouteWithChildren,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   SimulateurRoute: SimulateurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TarifsRoute: TarifsRoute,

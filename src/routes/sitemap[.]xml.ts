@@ -17,6 +17,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/contact", priority: "0.7", changefreq: "yearly" },
           { path: "/devis", priority: "0.9", changefreq: "monthly" },
           { path: "/zones", priority: "0.9", changefreq: "monthly" },
+          { path: "/mentions-legales", priority: "0.2", changefreq: "yearly" },
           {
             path: "/guides/prix-diagnostic-immobilier",
             priority: "0.85",
