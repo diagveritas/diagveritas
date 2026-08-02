@@ -319,6 +319,36 @@ function Index() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="border-t border-gold/15 bg-background">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Questions fréquentes"
+            title="Diagnostic immobilier : vos questions"
+            description="Les réponses aux questions que nos clients nous posent le plus souvent avant une vente ou une location."
+          />
+          <dl className="mt-12 divide-y divide-gold/15 rounded-sm border border-gold/20 bg-card">
+            {HOME_FAQ.map((f) => (
+              <div key={f.q} className="p-6 sm:p-8">
+                <dt className="flex items-start gap-3 font-display text-lg text-foreground">
+                  <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                  <span>{f.q}</span>
+                </dt>
+                <dd className="mt-3 pl-8 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-8 flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+            <Link to="/guides/prix-diagnostic-immobilier" className="text-gold hover:opacity-80">
+              Guide : prix d'un diagnostic immobilier →
+            </Link>
+            <Link to="/diagnostics" className="text-gold hover:opacity-80">
+              Tous les diagnostics obligatoires →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ZONES */}
       <section className="border-y border-gold/15 bg-card/40">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
