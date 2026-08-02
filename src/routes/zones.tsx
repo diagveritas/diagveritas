@@ -59,10 +59,25 @@ function ZonesPage() {
             <span className="gold-gradient-text">dans toute votre région</span>
           </h1>
           <p className="mt-6 max-w-3xl text-base text-muted-foreground sm:text-lg">
-            DIAG VERITAS intervient sans surcoût de déplacement dans plus de 15 villes
-            d'Île-de-France, de Seine-et-Marne et de l'Oise. Cliquez sur votre commune
-            pour découvrir notre expertise locale, les diagnostics obligatoires et nos tarifs.
+            DIAG VERITAS intervient sans surcoût de déplacement dans {CITIES.length} communes
+            d'Île-de-France, de Seine-et-Marne, du Val-d'Oise et de l'Oise. Cliquez sur votre
+            commune pour découvrir notre expertise locale, les diagnostics obligatoires et nos
+            tarifs.
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/devis"
+              className="inline-flex items-center gap-2 rounded-sm bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:opacity-90"
+            >
+              Devis gratuit sous 24 h <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link
+              to="/simulateur"
+              className="inline-flex items-center gap-2 rounded-sm border border-gold/50 px-6 py-3 text-xs font-semibold uppercase tracking-widest text-gold hover:bg-gold/10"
+            >
+              Trouver mes diagnostics obligatoires
+            </Link>
+          </div>
         </div>
       </section>
 

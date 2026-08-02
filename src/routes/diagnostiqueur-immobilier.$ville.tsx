@@ -287,6 +287,20 @@ function CityPage() {
             >
               Devis {city.name}
             </Link>
+            <div className="mt-5 space-y-2 border-t border-gold/20 pt-5 text-xs uppercase tracking-widest">
+              <Link to="/simulateur" className="block text-gold hover:opacity-80">
+                Simulateur : mes diagnostics obligatoires →
+              </Link>
+              <Link
+                to="/guides/prix-diagnostic-immobilier"
+                className="block text-gold hover:opacity-80"
+              >
+                Guide : prix d'un diagnostic →
+              </Link>
+              <Link to="/zones" className="block text-gold hover:opacity-80">
+                Toutes nos zones d'intervention →
+              </Link>
+            </div>
           </aside>
         </div>
       </section>

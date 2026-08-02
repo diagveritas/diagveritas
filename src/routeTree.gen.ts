@@ -13,11 +13,13 @@ import { Route as ZonesRouteImport } from './routes/zones'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimulateurRouteImport } from './routes/simulateur'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as DiagnosticsRouteImport } from './routes/diagnostics'
 import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DiagnosticsIndexRouteImport } from './routes/diagnostics.index'
 import { Route as GuidesPrixDiagnosticImmobilierRouteImport } from './routes/guides.prix-diagnostic-immobilier'
 import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
 import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
@@ -40,6 +42,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SimulateurRoute = SimulateurRouteImport.update({
   id: '/simulateur',
   path: '/simulateur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticsRoute = DiagnosticsRouteImport.update({
@@ -67,6 +74,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiagnosticsIndexRoute = DiagnosticsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DiagnosticsRoute,
+} as any)
 const GuidesPrixDiagnosticImmobilierRoute =
   GuidesPrixDiagnosticImmobilierRouteImport.update({
     id: '/guides/prix-diagnostic-immobilier',
@@ -91,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
@@ -98,13 +111,14 @@ export interface FileRoutesByFullPath {
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
   '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
+  '/diagnostics/': typeof DiagnosticsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
-  '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
@@ -112,6 +126,7 @@ export interface FileRoutesByTo {
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
   '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
+  '/diagnostics': typeof DiagnosticsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -120,6 +135,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/devis': typeof DevisRoute
   '/diagnostics': typeof DiagnosticsRouteWithChildren
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/simulateur': typeof SimulateurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tarifs': typeof TarifsRoute
@@ -127,6 +143,7 @@ export interface FileRoutesById {
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
   '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
+  '/diagnostics/': typeof DiagnosticsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -136,6 +153,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/mentions-legales'
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
@@ -143,13 +161,14 @@ export interface FileRouteTypes {
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
     | '/guides/prix-diagnostic-immobilier'
+    | '/diagnostics/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/a-propos'
     | '/contact'
     | '/devis'
-    | '/diagnostics'
+    | '/mentions-legales'
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
@@ -157,6 +176,7 @@ export interface FileRouteTypes {
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
     | '/guides/prix-diagnostic-immobilier'
+    | '/diagnostics'
   id:
     | '__root__'
     | '/'
@@ -164,6 +184,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/devis'
     | '/diagnostics'
+    | '/mentions-legales'
     | '/simulateur'
     | '/sitemap.xml'
     | '/tarifs'
@@ -171,6 +192,7 @@ export interface FileRouteTypes {
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
     | '/guides/prix-diagnostic-immobilier'
+    | '/diagnostics/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -179,6 +201,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DevisRoute: typeof DevisRoute
   DiagnosticsRoute: typeof DiagnosticsRouteWithChildren
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   SimulateurRoute: typeof SimulateurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TarifsRoute: typeof TarifsRoute
@@ -217,6 +240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SimulateurRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostics': {
       id: '/diagnostics'
       path: '/diagnostics'
@@ -252,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/diagnostics/': {
+      id: '/diagnostics/'
+      path: '/'
+      fullPath: '/diagnostics/'
+      preLoaderRoute: typeof DiagnosticsIndexRouteImport
+      parentRoute: typeof DiagnosticsRoute
+    }
     '/guides/prix-diagnostic-immobilier': {
       id: '/guides/prix-diagnostic-immobilier'
       path: '/guides/prix-diagnostic-immobilier'
@@ -278,10 +315,12 @@ declare module '@tanstack/react-router' {
 
 interface DiagnosticsRouteChildren {
   DiagnosticsSlugRoute: typeof DiagnosticsSlugRoute
+  DiagnosticsIndexRoute: typeof DiagnosticsIndexRoute
 }
 
 const DiagnosticsRouteChildren: DiagnosticsRouteChildren = {
   DiagnosticsSlugRoute: DiagnosticsSlugRoute,
+  DiagnosticsIndexRoute: DiagnosticsIndexRoute,
 }
 
 const DiagnosticsRouteWithChildren = DiagnosticsRoute._addFileChildren(
@@ -294,6 +333,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DevisRoute: DevisRoute,
   DiagnosticsRoute: DiagnosticsRouteWithChildren,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   SimulateurRoute: SimulateurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TarifsRoute: TarifsRoute,
@@ -304,13 +344,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

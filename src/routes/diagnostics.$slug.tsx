@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check, Phone, ArrowLeft, HelpCircle } from "lucide-react";
 import { CONTACT, DIAGNOSTICS, DIAGNOSTIC_FAQ } from "@/lib/diagnostics-data";
+import { CITIES } from "@/lib/cities-data";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/breadcrumbs";
 
 export const Route = createFileRoute("/diagnostics/$slug")({
@@ -204,7 +205,38 @@ function DiagnosticDetail() {
 
       <section className="border-t border-gold/15 bg-card/40">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <h2 className="font-display text-2xl text-foreground sm:text-3xl">Autres diagnostics</h2>
+          <h2 className="font-display text-2xl text-foreground sm:text-3xl">
+            {diag.name.split("—")[0].trim()} près de chez vous
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
+            Nous réalisons ce diagnostic dans {CITIES.length} communes d'Île-de-France et de l'Oise,
+            sans frais de déplacement.
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {CITIES.slice(0, 16).map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/diagnostiqueur-immobilier/$ville"
+                  params={{ ville: c.slug }}
+                  className="inline-block rounded-full border border-gold/25 px-3 py-1.5 text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:border-gold/70 hover:text-gold"
+                >
+                  {c.name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/zones"
+                className="inline-block rounded-full border border-gold/50 px-3 py-1.5 text-xs uppercase tracking-widest text-gold"
+              >
+                Toutes les villes
+              </Link>
+            </li>
+          </ul>
+
+          <h2 className="mt-16 font-display text-2xl text-foreground sm:text-3xl">
+            Autres diagnostics
+          </h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {others.map((d) => {
               const OtherIcon = d.icon;

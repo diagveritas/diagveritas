@@ -1,10 +1,37 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, ShieldCheck, Award, Clock, MapPin, ArrowRight, Star, Compass } from "lucide-react";
+import { Phone, ShieldCheck, Award, Clock, MapPin, ArrowRight, Star, Compass, HelpCircle } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
 import { SectionHeading } from "@/components/section-heading";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
 import { CITIES } from "@/lib/cities-data";
 import { trackCall, trackQuoteCta } from "@/lib/track";
+
+const HOME_FAQ = [
+  {
+    q: "Quels diagnostics immobiliers sont obligatoires pour vendre en Île-de-France ?",
+    a: "Pour une vente, le DPE et l'ERP sont systématiques. S'y ajoutent le diagnostic électrique et le diagnostic gaz si les installations ont plus de 15 ans, l'amiante si le permis de construire est antérieur au 1er juillet 1997, le CREP plomb si le bien est antérieur à 1949, la Loi Carrez en copropriété, et le diagnostic termites dans les communes classées par arrêté préfectoral. Notre simulateur gratuit établit la liste exacte pour votre bien.",
+  },
+  {
+    q: "Combien coûte un diagnostic immobilier chez DIAG VERITAS ?",
+    a: "Un DPE démarre à 99 € TTC et un diagnostic amiante à 89 € TTC. Les packs vente ou location, qui regroupent plusieurs diagnostics en une seule visite, sont nettement plus économiques que des prestations séparées. Le devis est gratuit, ferme et transmis sous 24 h, sans frais de déplacement en Île-de-France et dans l'Oise.",
+  },
+  {
+    q: "En combien de temps intervenez-vous et recevez-vous le rapport ?",
+    a: "Nous intervenons sous 48 h ouvrées sur l'ensemble de notre zone. Les rapports sont transmis par e-mail au format PDF, souvent le jour même de la visite pour les diagnostics simples (DPE, Loi Carrez, Loi Boutin), et sous 24 à 48 h pour les diagnostics avec prélèvements.",
+  },
+  {
+    q: "Vos diagnostics sont-ils opposables devant un notaire ?",
+    a: "Oui. DIAG VERITAS est certifié par Bureau Veritas Certification, organisme accrédité COFRAC, et couvert par une assurance responsabilité civile professionnelle conforme à l'article L. 271-6 du Code de la construction et de l'habitation. Nos rapports sont donc directement recevables par les notaires, agences et locataires.",
+  },
+  {
+    q: "Intervenez-vous dans l'Oise et à Paris sans frais supplémentaires ?",
+    a: "Oui. Livry-Gargan, la Seine-Saint-Denis, la Seine-et-Marne, le Val-d'Oise, Paris et le sud de l'Oise sont couverts sans surcoût de déplacement. Chaque commune desservie dispose d'une page dédiée détaillant les diagnostics à prévoir localement.",
+  },
+  {
+    q: "Combien de temps mon DPE reste-t-il valable ?",
+    a: "Un DPE réalisé depuis le 1er juillet 2021 est valable 10 ans. Les DPE antérieurs ne sont plus valides et doivent être refaits selon la méthode 3CL-DPE 2021. Un DPE est également à refaire après des travaux modifiant significativement la performance énergétique du logement.",
+  },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,6 +58,20 @@ export const Route = createFileRoute("/")({
     links: [
       { rel: "canonical", href: "https://diagveritas.fr/" },
       { rel: "preload", as: "image", href: heroImage, fetchpriority: "high" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: HOME_FAQ.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
     ],
   }),
   component: Index,
@@ -275,6 +316,36 @@ function Index() {
               </figcaption>
             </figure>
           ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-t border-gold/15 bg-background">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Questions fréquentes"
+            title="Diagnostic immobilier : vos questions"
+            description="Les réponses aux questions que nos clients nous posent le plus souvent avant une vente ou une location."
+          />
+          <dl className="mt-12 divide-y divide-gold/15 rounded-sm border border-gold/20 bg-card">
+            {HOME_FAQ.map((f) => (
+              <div key={f.q} className="p-6 sm:p-8">
+                <dt className="flex items-start gap-3 font-display text-lg text-foreground">
+                  <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                  <span>{f.q}</span>
+                </dt>
+                <dd className="mt-3 pl-8 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-8 flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+            <Link to="/guides/prix-diagnostic-immobilier" className="text-gold hover:opacity-80">
+              Guide : prix d'un diagnostic immobilier →
+            </Link>
+            <Link to="/diagnostics" className="text-gold hover:opacity-80">
+              Tous les diagnostics obligatoires →
+            </Link>
+          </div>
         </div>
       </section>
 
