@@ -1,42 +1,10 @@
-import { createFileRoute, Link, Outlet, useMatches } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
-import { SectionHeading } from "@/components/section-heading";
-import { DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
+// Route de layout pure : aucune balise head ici, sinon les pages enfants
+// hériteraient d'un second <link rel="canonical"> (les links sont concaténés).
 export const Route = createFileRoute("/diagnostics")({
-  head: () => ({
-    meta: [
-      {
-        title: "Diagnostics immobiliers obligatoires | DIAG VERITAS",
-      },
-      {
-        name: "description",
-        content:
-          "DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin et Loi Carrez en Île-de-France et Oise. Diagnostiqueur certifié Bureau Veritas.",
-      },
-      {
-        property: "og:title",
-        content: "Diagnostics immobiliers obligatoires — DIAG VERITAS",
-      },
-      {
-        property: "og:description",
-        content: "9 diagnostics réglementaires réalisés en une seule visite. Devis gratuit.",
-      },
-      { property: "og:url", content: "https://diagveritas.fr/diagnostics" },
-    ],
-    links: [{ rel: "canonical", href: "https://diagveritas.fr/diagnostics" }],
-  }),
-  component: DiagnosticsLayout,
+  component: () => <Outlet />,
 });
-
-function DiagnosticsLayout() {
-  const matches = useMatches();
-  const isChild = matches.some((m) => m.routeId === "/diagnostics/$slug");
-  if (isChild) return <Outlet />;
-  return <DiagnosticsIndex />;
-}
-
-function DiagnosticsIndex() {
   return (
     <div>
       <section className="border-b border-gold/15 bg-card/40">
