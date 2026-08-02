@@ -1,0 +1,30 @@
+# DIAG VERITAS
+
+> Cabinet de diagnostics immobiliers certifié Bureau Veritas, basé à Livry-Gargan (93). Interventions en Île-de-France et dans l'Oise sous 48 h : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez, PPPT, DTG, RAAT, RAAD.
+
+Contact : 06 72 29 73 62 — contact.diagveritas@gmail.com — 14 rue Eugène Massé, 93190 Livry-Gargan. Devis gratuit sous 24 h.
+
+## Pages
+
+- [Accueil](/): Diagnostics immobiliers certifiés en Île-de-France et dans l'Oise.
+- [Diagnostics](/diagnostics): Tous les diagnostics réglementaires, tarifs et obligations.
+- [Simulateur](/simulateur): Identifier en 7 questions les diagnostics obligatoires pour un bien.
+- [Zones d'intervention](/zones): Toutes les communes couvertes en Île-de-France et dans l'Oise.
+- [À propos](/a-propos): Certifications, accréditations et assurances du cabinet.
+- [Contact](/contact): Coordonnées, horaires et localisation.
+- [Demande de devis](/devis): Formulaire de devis gratuit, réponse sous 24 h.
+- [Mentions légales](/mentions-legales): Éditeur, hébergement, certifications et assurance.
+
+## Guides
+
+- [Prix d'un diagnostic immobilier](/guides/prix-diagnostic-immobilier): Tarifs détaillés par diagnostic et par pack vente/location.
+
+## Exemples de pages diagnostic
+
+- [DPE](/diagnostics/dpe): Diagnostic de performance énergétique, méthode 3CL-DPE 2021.
+- [Diagnostic amiante](/diagnostics/amiante): Repérage amiante pour les biens antérieurs à juillet 1997.
+
+## Exemples de pages ville
+
+- [Diagnostiqueur immobilier Livry-Gargan](/diagnostiqueur-immobilier/livry-gargan): Expertise locale en Seine-Saint-Denis.
+- [Diagnostiqueur immobilier Sevran](/diagnostiqueur-immobilier/sevran): Diagnostics obligatoires à Sevran (93).
