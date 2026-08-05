@@ -29,6 +29,7 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
     const title = `Diagnostiqueur immobilier ${city.name} — DPE dès 99 €`;
     const description = `DPE dès 99 €, amiante, plomb, électricité, gaz et ERP à ${city.name} (${city.postalCode}) : diagnostiqueur certifié Bureau Veritas, intervention sous 48 h, devis gratuit en 24 h.`;
     const faqs = cityFaq(city);
+  const steps = citySteps(city);
 
     return {
       meta: [
@@ -275,6 +276,95 @@ function CityPage() {
               </Link>
             </div>
           </aside>
+        </div>
+      </section>
+
+      {/* VENTE / LOCATION */}
+      <section className="border-t border-gold/15 bg-card/40">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionHeading
+            align="left"
+            eyebrow="Vos obligations"
+            title={`Vendre ou louer à ${city.name} : les diagnostics exigés`}
+          />
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-sm border border-gold/25 bg-background p-7">
+              <h3 className="font-display text-xl text-foreground">
+                Vendre un bien à {city.name}
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                {[
+                  "DPE — obligatoire dès l'annonce, valable 10 ans",
+                  "ERP — état des risques, valable 6 mois",
+                  "Électricité et gaz — installations de plus de 15 ans",
+                  "Amiante — permis de construire antérieur au 01/07/1997",
+                  "CREP plomb — bien construit avant 1949",
+                  "Loi Carrez — tout lot en copropriété",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/guides/$slug"
+                params={{ slug: "diagnostics-obligatoires-vente" }}
+                className="mt-6 inline-block text-xs uppercase tracking-widest text-gold hover:opacity-80"
+              >
+                Guide complet vente →
+              </Link>
+            </div>
+            <div className="rounded-sm border border-gold/25 bg-background p-7">
+              <h3 className="font-display text-xl text-foreground">
+                Louer un logement à {city.name}
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                {[
+                  "DPE — logements classés G interdits à la location depuis 2025",
+                  "ERP — état des risques, valable 6 mois",
+                  "Loi Boutin — surface habitable, location vide",
+                  "CREP plomb — logement antérieur à 1949",
+                  "Électricité et gaz — installations de plus de 15 ans",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/guides/$slug"
+                params={{ slug: "diagnostics-obligatoires-location" }}
+                className="mt-6 inline-block text-xs uppercase tracking-widest text-gold hover:opacity-80"
+              >
+                Guide complet location →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DEROULE */}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <SectionHeading
+          align="left"
+          eyebrow="Comment ça se passe"
+          title={`Votre intervention à ${city.name}, étape par étape`}
+        />
+        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => (
+            <li key={s.t} className="rounded-sm border border-gold/20 bg-card p-6">
+              <div className="text-xs uppercase tracking-widest text-gold">{s.t}</div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-14">
+          <CallbackCta
+            source={`city:${city.slug}:callback`}
+            title={`Un prix pour votre bien à ${city.name} ?`}
+          />
         </div>
       </section>
 
