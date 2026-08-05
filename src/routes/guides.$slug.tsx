@@ -3,6 +3,7 @@ import { Check, HelpCircle } from "lucide-react";
 import { Breadcrumbs, breadcrumbJsonLd, SITE_URL } from "@/components/breadcrumbs";
 import { CallbackCta } from "@/components/callback-cta";
 import { GUIDES, guideBySlug } from "@/lib/guides-data";
+import type { Guide, GuideSection } from "@/lib/guides-data";
 
 export const Route = createFileRoute("/guides/$slug")({
   loader: ({ params }) => {
@@ -73,7 +74,7 @@ export const Route = createFileRoute("/guides/$slug")({
 });
 
 function GuidePage() {
-  const { guide } = Route.useLoaderData();
+  const { guide } = Route.useLoaderData() as { guide: Guide };
   const others = GUIDES.filter((g) => g.slug !== guide.slug).slice(0, 3);
 
   return (
@@ -98,17 +99,17 @@ function GuidePage() {
       </section>
 
       <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-        {guide.sections.map((s) => (
+        {guide.sections.map((s: GuideSection) => (
           <section key={s.h} className="mt-12 first:mt-0">
             <h2 className="font-display text-2xl text-foreground sm:text-3xl">{s.h}</h2>
-            {s.p.map((p) => (
+            {s.p.map((p: string) => (
               <p key={p.slice(0, 40)} className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {p}
               </p>
             ))}
             {s.list && (
               <ul className="mt-6 space-y-3 rounded-sm border border-gold/20 bg-card p-6">
-                {s.list.map((li) => (
+                {s.list.map((li: string) => (
                   <li key={li} className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                     <span>{li}</span>
@@ -144,7 +145,7 @@ function GuidePage() {
         <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl text-foreground sm:text-3xl">Questions fréquentes</h2>
           <dl className="mt-10 divide-y divide-gold/15 rounded-sm border border-gold/20 bg-card">
-            {guide.faq.map((f) => (
+            {guide.faq.map((f: { q: string; a: string }) => (
               <div key={f.q} className="p-6 sm:p-8">
                 <dt className="flex items-start gap-3 font-display text-lg text-foreground">
                   <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
