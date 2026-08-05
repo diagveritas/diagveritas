@@ -149,6 +149,7 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
 
 function CityPage() {
   const { city } = Route.useLoaderData();
+  const steps = citySteps(city);
   const nearby = CITIES.filter((c) => c.slug !== city.slug)
     .sort((a, b) => Math.abs(a.distanceKm - city.distanceKm) - Math.abs(b.distanceKm - city.distanceKm))
     .slice(0, 6);
