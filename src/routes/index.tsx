@@ -59,7 +59,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://diagveritas.fr/" },
-      { rel: "preload", as: "image", href: heroImage, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
     ],
     scripts: [
       {
