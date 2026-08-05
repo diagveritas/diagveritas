@@ -3,38 +3,11 @@ import { ArrowRight, Phone, MapPin, ShieldCheck, Clock, Building2, CheckCircle2,
 import { SectionHeading } from "@/components/section-heading";
 import { CITIES, cityBySlug } from "@/lib/cities-data";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { cityFaq, citySteps } from "@/lib/city-content";
+import { CallbackCta } from "@/components/callback-cta";
 import { trackCall, trackQuoteCta } from "@/lib/track";
 
 const SITE_URL = "https://diagveritas.fr";
-
-function cityFaq(cityName: string) {
-  return [
-    {
-      q: `Quel est le prix d'un DPE à ${cityName} ?`,
-      a: `Le prix d'un DPE à ${cityName} démarre à 99€ TTC pour un appartement standard. Le tarif final dépend de la surface, de l'ancienneté du bien et du nombre de diagnostics groupés. DIAG VERITAS vous transmet un devis ferme sous 24h.`,
-    },
-    {
-      q: `Combien de temps pour intervenir à ${cityName} ?`,
-      a: `Nous intervenons sous 48h ouvrées à ${cityName}. Le rapport de diagnostic vous est remis rapidement, souvent le jour même de la visite pour les diagnostics simples (DPE, Loi Carrez, Loi Boutin).`,
-    },
-    {
-      q: `Quels diagnostics sont obligatoires pour vendre à ${cityName} ?`,
-      a: `Pour une vente à ${cityName}, sont généralement obligatoires : le DPE, l'ERP, le diagnostic électrique (installation > 15 ans), le diagnostic gaz (installation > 15 ans), l'amiante (permis avant 07/1997), le CREP plomb (bien avant 1949) et la Loi Carrez (copropriété). Le diagnostic termites peut s'ajouter si la commune est en zone préfectorale à risque.`,
-    },
-    {
-      q: `DIAG VERITAS est-il certifié à ${cityName} ?`,
-      a: `Oui. DIAG VERITAS est certifié Bureau Veritas pour l'ensemble des diagnostics réglementaires, accrédité COFRAC, et couvert par une assurance RC Pro conforme à la législation. Nos certifications sont vérifiables sur simple demande.`,
-    },
-    {
-      q: `Intervenez-vous sans surcoût de déplacement à ${cityName} ?`,
-      a: `Oui. ${cityName} fait partie de notre zone d'intervention immédiate depuis Livry-Gargan (93). Aucun frais de déplacement n'est ajouté au devis.`,
-    },
-    {
-      q: `Comment obtenir un devis pour ${cityName} ?`,
-      a: `Vous pouvez demander votre devis en ligne via notre formulaire de demande de devis, utiliser notre simulateur pour identifier les diagnostics obligatoires, ou nous appeler directement au ${CONTACT.phone}. Réponse garantie sous 24h.`,
-    },
-  ];
-}
 
 export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
   loader: ({ params }) => {
@@ -53,9 +26,9 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
     }
     const { city } = loaderData;
     const url = `${SITE_URL}/diagnostiqueur-immobilier/${params.ville}`;
-    const title = `Diagnostiqueur immobilier ${city.name} | DIAG VERITAS`;
-    const description = `DPE, amiante, plomb, électricité, gaz et ERP à ${city.name} : diagnostiqueur certifié Bureau Veritas, intervention sous 48 h, devis gratuit.`;
-    const faqs = cityFaq(city.name);
+    const title = `Diagnostiqueur immobilier ${city.name} — DPE dès 99 €`;
+    const description = `DPE dès 99 €, amiante, plomb, électricité, gaz et ERP à ${city.name} (${city.postalCode}) : diagnostiqueur certifié Bureau Veritas, intervention sous 48 h, devis gratuit en 24 h.`;
+    const faqs = cityFaq(city);
 
     return {
       meta: [
@@ -178,7 +151,7 @@ function CityPage() {
   const nearby = CITIES.filter((c) => c.slug !== city.slug)
     .sort((a, b) => Math.abs(a.distanceKm - city.distanceKm) - Math.abs(b.distanceKm - city.distanceKm))
     .slice(0, 6);
-  const faqs = cityFaq(city.name);
+  const faqs = cityFaq(city);
 
   return (
     <div>
