@@ -2,6 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check, Phone, ArrowLeft, HelpCircle } from "lucide-react";
 import { CONTACT, DIAGNOSTICS, DIAGNOSTIC_FAQ } from "@/lib/diagnostics-data";
 import { CITIES } from "@/lib/cities-data";
+import { GUIDES } from "@/lib/guides-data";
+import { CallbackCta } from "@/components/callback-cta";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/breadcrumbs";
 
 export const Route = createFileRoute("/diagnostics/$slug")({
@@ -202,6 +204,23 @@ function DiagnosticDetail() {
           </div>
         </section>
       )}
+
+      <section className="mx-auto max-w-4xl px-4 pb-4 sm:px-6 lg:px-8">
+        <CallbackCta source={`diag:${diag.slug}:callback`} />
+        <ul className="mt-8 flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+          {GUIDES.slice(0, 4).map((g) => (
+            <li key={g.slug}>
+              <Link
+                to="/guides/$slug"
+                params={{ slug: g.slug }}
+                className="text-gold hover:opacity-80"
+              >
+                {g.h1} {g.h1Accent} →
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="border-t border-gold/15 bg-card/40">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
