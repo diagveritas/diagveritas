@@ -3,38 +3,11 @@ import { ArrowRight, Phone, MapPin, ShieldCheck, Clock, Building2, CheckCircle2,
 import { SectionHeading } from "@/components/section-heading";
 import { CITIES, cityBySlug } from "@/lib/cities-data";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
+import { cityFaq, citySteps } from "@/lib/city-content";
+import { CallbackCta } from "@/components/callback-cta";
 import { trackCall, trackQuoteCta } from "@/lib/track";
 
 const SITE_URL = "https://diagveritas.fr";
-
-function cityFaq(cityName: string) {
-  return [
-    {
-      q: `Quel est le prix d'un DPE à ${cityName} ?`,
-      a: `Le prix d'un DPE à ${cityName} démarre à 99€ TTC pour un appartement standard. Le tarif final dépend de la surface, de l'ancienneté du bien et du nombre de diagnostics groupés. DIAG VERITAS vous transmet un devis ferme sous 24h.`,
-    },
-    {
-      q: `Combien de temps pour intervenir à ${cityName} ?`,
-      a: `Nous intervenons sous 48h ouvrées à ${cityName}. Le rapport de diagnostic vous est remis rapidement, souvent le jour même de la visite pour les diagnostics simples (DPE, Loi Carrez, Loi Boutin).`,
-    },
-    {
-      q: `Quels diagnostics sont obligatoires pour vendre à ${cityName} ?`,
-      a: `Pour une vente à ${cityName}, sont généralement obligatoires : le DPE, l'ERP, le diagnostic électrique (installation > 15 ans), le diagnostic gaz (installation > 15 ans), l'amiante (permis avant 07/1997), le CREP plomb (bien avant 1949) et la Loi Carrez (copropriété). Le diagnostic termites peut s'ajouter si la commune est en zone préfectorale à risque.`,
-    },
-    {
-      q: `DIAG VERITAS est-il certifié à ${cityName} ?`,
-      a: `Oui. DIAG VERITAS est certifié Bureau Veritas pour l'ensemble des diagnostics réglementaires, accrédité COFRAC, et couvert par une assurance RC Pro conforme à la législation. Nos certifications sont vérifiables sur simple demande.`,
-    },
-    {
-      q: `Intervenez-vous sans surcoût de déplacement à ${cityName} ?`,
-      a: `Oui. ${cityName} fait partie de notre zone d'intervention immédiate depuis Livry-Gargan (93). Aucun frais de déplacement n'est ajouté au devis.`,
-    },
-    {
-      q: `Comment obtenir un devis pour ${cityName} ?`,
-      a: `Vous pouvez demander votre devis en ligne via notre formulaire de demande de devis, utiliser notre simulateur pour identifier les diagnostics obligatoires, ou nous appeler directement au ${CONTACT.phone}. Réponse garantie sous 24h.`,
-    },
-  ];
-}
 
 export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
   loader: ({ params }) => {
@@ -53,9 +26,10 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
     }
     const { city } = loaderData;
     const url = `${SITE_URL}/diagnostiqueur-immobilier/${params.ville}`;
-    const title = `Diagnostiqueur immobilier ${city.name} | DIAG VERITAS`;
-    const description = `DPE, amiante, plomb, électricité, gaz et ERP à ${city.name} : diagnostiqueur certifié Bureau Veritas, intervention sous 48 h, devis gratuit.`;
-    const faqs = cityFaq(city.name);
+    const title = `Diagnostiqueur immobilier ${city.name} — DPE dès 99 €`;
+    const description = `DPE dès 99 €, amiante, plomb, électricité, gaz et ERP à ${city.name} (${city.postalCode}) : diagnostiqueur certifié Bureau Veritas, intervention sous 48 h, devis gratuit en 24 h.`;
+    const faqs = cityFaq(city);
+  const steps = citySteps(city);
 
     return {
       meta: [
@@ -175,10 +149,11 @@ export const Route = createFileRoute("/diagnostiqueur-immobilier/$ville")({
 
 function CityPage() {
   const { city } = Route.useLoaderData();
+  const steps = citySteps(city);
   const nearby = CITIES.filter((c) => c.slug !== city.slug)
     .sort((a, b) => Math.abs(a.distanceKm - city.distanceKm) - Math.abs(b.distanceKm - city.distanceKm))
     .slice(0, 6);
-  const faqs = cityFaq(city.name);
+  const faqs = cityFaq(city);
 
   return (
     <div>
@@ -302,6 +277,95 @@ function CityPage() {
               </Link>
             </div>
           </aside>
+        </div>
+      </section>
+
+      {/* VENTE / LOCATION */}
+      <section className="border-t border-gold/15 bg-card/40">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionHeading
+            align="left"
+            eyebrow="Vos obligations"
+            title={`Vendre ou louer à ${city.name} : les diagnostics exigés`}
+          />
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-sm border border-gold/25 bg-background p-7">
+              <h3 className="font-display text-xl text-foreground">
+                Vendre un bien à {city.name}
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                {[
+                  "DPE — obligatoire dès l'annonce, valable 10 ans",
+                  "ERP — état des risques, valable 6 mois",
+                  "Électricité et gaz — installations de plus de 15 ans",
+                  "Amiante — permis de construire antérieur au 01/07/1997",
+                  "CREP plomb — bien construit avant 1949",
+                  "Loi Carrez — tout lot en copropriété",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/guides/$slug"
+                params={{ slug: "diagnostics-obligatoires-vente" }}
+                className="mt-6 inline-block text-xs uppercase tracking-widest text-gold hover:opacity-80"
+              >
+                Guide complet vente →
+              </Link>
+            </div>
+            <div className="rounded-sm border border-gold/25 bg-background p-7">
+              <h3 className="font-display text-xl text-foreground">
+                Louer un logement à {city.name}
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                {[
+                  "DPE — logements classés G interdits à la location depuis 2025",
+                  "ERP — état des risques, valable 6 mois",
+                  "Loi Boutin — surface habitable, location vide",
+                  "CREP plomb — logement antérieur à 1949",
+                  "Électricité et gaz — installations de plus de 15 ans",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/guides/$slug"
+                params={{ slug: "diagnostics-obligatoires-location" }}
+                className="mt-6 inline-block text-xs uppercase tracking-widest text-gold hover:opacity-80"
+              >
+                Guide complet location →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DEROULE */}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <SectionHeading
+          align="left"
+          eyebrow="Comment ça se passe"
+          title={`Votre intervention à ${city.name}, étape par étape`}
+        />
+        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => (
+            <li key={s.t} className="rounded-sm border border-gold/20 bg-card p-6">
+              <div className="text-xs uppercase tracking-widest text-gold">{s.t}</div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-14">
+          <CallbackCta
+            source={`city:${city.slug}:callback`}
+            title={`Un prix pour votre bien à ${city.name} ?`}
+          />
         </div>
       </section>
 

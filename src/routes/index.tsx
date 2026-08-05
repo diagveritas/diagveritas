@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone, ShieldCheck, Award, Clock, MapPin, ArrowRight, Star, Compass, HelpCircle } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
 import { SectionHeading } from "@/components/section-heading";
+import { CallbackCta } from "@/components/callback-cta";
+import { GUIDES } from "@/lib/guides-data";
 import { CONTACT, DIAGNOSTICS } from "@/lib/diagnostics-data";
 import { CITIES } from "@/lib/cities-data";
 import { trackCall, trackQuoteCta } from "@/lib/track";
@@ -37,16 +39,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Diagnostic immobilier Livry-Gargan (93) | DIAG VERITAS",
+        title: "Diagnostic immobilier Livry-Gargan (93) — DPE dès 99 €",
       },
       {
         name: "description",
         content:
-          "Diagnostiqueur immobilier certifié Bureau Veritas à Livry-Gargan : DPE, amiante, plomb, gaz, électricité, ERP en Île-de-France et Oise. Devis gratuit 24 h.",
+          "Diagnostiqueur certifié Bureau Veritas : DPE dès 99 €, amiante, plomb, gaz, électricité, ERP en Île-de-France et Oise. Intervention 48 h, devis gratuit sous 24 h.",
       },
       {
         property: "og:title",
-        content: "Diagnostic immobilier Livry-Gargan (93) | DIAG VERITAS",
+        content: "Diagnostic immobilier Livry-Gargan (93) — DPE dès 99 €",
       },
       {
         property: "og:description",
@@ -57,7 +59,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://diagveritas.fr/" },
-      { rel: "preload", as: "image", href: heroImage, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
     ],
     scripts: [
       {
@@ -345,6 +347,29 @@ function Index() {
             <Link to="/diagnostics" className="text-gold hover:opacity-80">
               Tous les diagnostics obligatoires →
             </Link>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {GUIDES.slice(0, 3).map((g) => (
+              <Link
+                key={g.slug}
+                to="/guides/$slug"
+                params={{ slug: g.slug }}
+                className="rounded-sm border border-gold/20 bg-card p-5 transition-colors hover:border-gold/60"
+              >
+                <div className="text-[10px] uppercase tracking-[0.22em] text-gold">{g.eyebrow}</div>
+                <div className="mt-2 font-display text-base text-foreground">
+                  {g.h1} {g.h1Accent}
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-6 text-center text-xs uppercase tracking-widest">
+            <Link to="/guides" className="text-gold hover:opacity-80">
+              Tous nos guides pratiques →
+            </Link>
+          </div>
+          <div className="mt-14">
+            <CallbackCta source="home:callback" />
           </div>
         </div>
       </section>

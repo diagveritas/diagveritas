@@ -28,3 +28,13 @@ Contact : 06 72 29 73 62 — contact.diagveritas@gmail.com — 14 rue Eugène Ma
 
 - [Diagnostiqueur immobilier Livry-Gargan](/diagnostiqueur-immobilier/livry-gargan): Expertise locale en Seine-Saint-Denis.
 - [Diagnostiqueur immobilier Sevran](/diagnostiqueur-immobilier/sevran): Diagnostics obligatoires à Sevran (93).
+
+## Guides complets
+
+- [Tous les guides](/guides): Sommaire des guides pratiques du diagnostic immobilier.
+- [Diagnostics obligatoires pour vendre](/guides/diagnostics-obligatoires-vente)
+- [Diagnostics obligatoires pour louer](/guides/diagnostics-obligatoires-location)
+- [DPE obligatoire pour louer](/guides/dpe-obligatoire-location)
+- [DPE classé F ou G : que faire](/guides/dpe-f-ou-g-que-faire)
+- [Durée de validité des diagnostics](/guides/duree-validite-diagnostics-immobiliers)
+- [Repérage amiante avant travaux](/guides/amiante-avant-travaux)

@@ -19,8 +19,10 @@ import { Route as DevisRouteImport } from './routes/devis'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 import { Route as DiagnosticsIndexRouteImport } from './routes/diagnostics.index'
 import { Route as GuidesPrixDiagnosticImmobilierRouteImport } from './routes/guides.prix-diagnostic-immobilier'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
 import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
 
@@ -74,6 +76,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiagnosticsIndexRoute = DiagnosticsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +92,11 @@ const GuidesPrixDiagnosticImmobilierRoute =
     path: '/guides/prix-diagnostic-immobilier',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiagnostiqueurImmobilierVilleRoute =
   DiagnostiqueurImmobilierVilleRouteImport.update({
     id: '/diagnostiqueur-immobilier/$ville',
@@ -110,8 +122,10 @@ export interface FileRoutesByFullPath {
   '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
   '/diagnostics/': typeof DiagnosticsIndexRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,8 +139,10 @@ export interface FileRoutesByTo {
   '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
   '/diagnostics': typeof DiagnosticsIndexRoute
+  '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,8 +158,10 @@ export interface FileRoutesById {
   '/zones': typeof ZonesRoute
   '/diagnostics/$slug': typeof DiagnosticsSlugRoute
   '/diagnostiqueur-immobilier/$ville': typeof DiagnostiqueurImmobilierVilleRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/guides/prix-diagnostic-immobilier': typeof GuidesPrixDiagnosticImmobilierRoute
   '/diagnostics/': typeof DiagnosticsIndexRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,8 +178,10 @@ export interface FileRouteTypes {
     | '/zones'
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
+    | '/guides/$slug'
     | '/guides/prix-diagnostic-immobilier'
     | '/diagnostics/'
+    | '/guides/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -175,8 +195,10 @@ export interface FileRouteTypes {
     | '/zones'
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
+    | '/guides/$slug'
     | '/guides/prix-diagnostic-immobilier'
     | '/diagnostics'
+    | '/guides'
   id:
     | '__root__'
     | '/'
@@ -191,8 +213,10 @@ export interface FileRouteTypes {
     | '/zones'
     | '/diagnostics/$slug'
     | '/diagnostiqueur-immobilier/$ville'
+    | '/guides/$slug'
     | '/guides/prix-diagnostic-immobilier'
     | '/diagnostics/'
+    | '/guides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -207,7 +231,9 @@ export interface RootRouteChildren {
   TarifsRoute: typeof TarifsRoute
   ZonesRoute: typeof ZonesRoute
   DiagnostiqueurImmobilierVilleRoute: typeof DiagnostiqueurImmobilierVilleRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
   GuidesPrixDiagnosticImmobilierRoute: typeof GuidesPrixDiagnosticImmobilierRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -282,6 +308,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostics/': {
       id: '/diagnostics/'
       path: '/'
@@ -294,6 +327,13 @@ declare module '@tanstack/react-router' {
       path: '/guides/prix-diagnostic-immobilier'
       fullPath: '/guides/prix-diagnostic-immobilier'
       preLoaderRoute: typeof GuidesPrixDiagnosticImmobilierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostiqueur-immobilier/$ville': {
@@ -339,18 +379,10 @@ const rootRouteChildren: RootRouteChildren = {
   TarifsRoute: TarifsRoute,
   ZonesRoute: ZonesRoute,
   DiagnostiqueurImmobilierVilleRoute: DiagnostiqueurImmobilierVilleRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
   GuidesPrixDiagnosticImmobilierRoute: GuidesPrixDiagnosticImmobilierRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
