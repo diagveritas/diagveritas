@@ -50,6 +50,11 @@ export function SiteFooter() {
                   Guide : prix d'un diagnostic →
                 </Link>
               </li>
+              <li>
+                <Link to="/guides" className="transition-colors hover:text-gold">
+                  Tous nos guides →
+                </Link>
+              </li>
             </ul>
           </div>
 
