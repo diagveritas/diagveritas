@@ -99,7 +99,7 @@ function DiagNotFound() {
 function DiagnosticDetail() {
   const { diag } = Route.useLoaderData();
   const Icon = diag.icon;
-  const others = DIAGNOSTICS.filter((d) => d.slug !== diag.slug).slice(0, 3);
+  const others = DIAGNOSTICS.filter((d) => d.slug !== diag.slug);
   const faq = DIAGNOSTIC_FAQ[diag.slug] ?? [];
 
   return (
