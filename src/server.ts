@@ -44,9 +44,33 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+// Domaines historiques / alias : redirection 301 permanente vers le domaine canonique
+// afin d'éviter tout contenu dupliqué dans Google.
+const CANONICAL_HOST = "diagveritas.fr";
+const REDIRECT_HOSTS = new Set(["diagveritas.lovable.app", "www.diagveritas.fr"]);
+
+function canonicalHostRedirect(request: Request): Response | undefined {
+  let url: URL;
+  try {
+    url = new URL(request.url);
+  } catch {
+    return undefined;
+  }
+  if (!REDIRECT_HOSTS.has(url.hostname)) return undefined;
+  url.protocol = "https:";
+  url.hostname = CANONICAL_HOST;
+  url.port = "";
+  return new Response(null, {
+    status: 301,
+    headers: { Location: url.toString(), "Cache-Control": "public, max-age=3600" },
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const redirect = canonicalHostRedirect(request);
+      if (redirect) return redirect;
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

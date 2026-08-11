@@ -107,7 +107,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -125,8 +128,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "DIAG VERITAS",
           alternateName: "Diag Veritas Diagnostic Immobilier",
           url: "https://diagveritas.fr",
-          logo: "https://diagveritas.fr/favicon.ico",
-          image: "https://diagveritas.fr/favicon.ico",
+          logo: "https://diagveritas.fr/favicon.png",
+          image: "https://diagveritas.fr/favicon.png",
           description:
             "Diagnostics immobiliers certifiés en Île-de-France et dans l'Oise : DPE, amiante, plomb, électricité, gaz, termites, ERP, Loi Boutin, Loi Carrez.",
           telephone: "+33672297362",
