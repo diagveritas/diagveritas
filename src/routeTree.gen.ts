@@ -9,61 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AProposRouteImport } from './routes/a-propos'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as DevisRouteImport } from './routes/devis'
-import { Route as DiagnosticsRouteImport } from './routes/diagnostics'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
-import { Route as SimulateurRouteImport } from './routes/simulateur'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as ZonesRouteImport } from './routes/zones'
-import { Route as DiagnosticsIndexRouteImport } from './routes/diagnostics.index'
-import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
-import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
+import { Route as TarifsRouteImport } from './routes/tarifs'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SimulateurRouteImport } from './routes/simulateur'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as DiagnosticsRouteImport } from './routes/diagnostics'
+import { Route as DevisRouteImport } from './routes/devis'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AProposRouteImport } from './routes/a-propos'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuidesIndexRouteImport } from './routes/guides.index'
-import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
+import { Route as DiagnosticsIndexRouteImport } from './routes/diagnostics.index'
 import { Route as GuidesPrixDiagnosticImmobilierRouteImport } from './routes/guides.prix-diagnostic-immobilier'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
+import { Route as DiagnostiqueurImmobilierVilleRouteImport } from './routes/diagnostiqueur-immobilier.$ville'
+import { Route as DiagnosticsSlugRouteImport } from './routes/diagnostics.$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AProposRoute = AProposRouteImport.update({
-  id: '/a-propos',
-  path: '/a-propos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DevisRoute = DevisRouteImport.update({
-  id: '/devis',
-  path: '/devis',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiagnosticsRoute = DiagnosticsRouteImport.update({
-  id: '/diagnostics',
-  path: '/diagnostics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SimulateurRoute = SimulateurRouteImport.update({
-  id: '/simulateur',
-  path: '/simulateur',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const ZonesRoute = ZonesRouteImport.update({
+  id: '/zones',
+  path: '/zones',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TarifsRoute = TarifsRouteImport.update({
@@ -71,9 +36,49 @@ const TarifsRoute = TarifsRouteImport.update({
   path: '/tarifs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ZonesRoute = ZonesRouteImport.update({
-  id: '/zones',
-  path: '/zones',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulateurRoute = SimulateurRouteImport.update({
+  id: '/simulateur',
+  path: '/simulateur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnosticsRoute = DiagnosticsRouteImport.update({
+  id: '/diagnostics',
+  path: '/diagnostics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevisRoute = DevisRouteImport.update({
+  id: '/devis',
+  path: '/devis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticsIndexRoute = DiagnosticsIndexRouteImport.update({
@@ -81,10 +86,16 @@ const DiagnosticsIndexRoute = DiagnosticsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DiagnosticsRoute,
 } as any)
-const DiagnosticsSlugRoute = DiagnosticsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => DiagnosticsRoute,
+const GuidesPrixDiagnosticImmobilierRoute =
+  GuidesPrixDiagnosticImmobilierRouteImport.update({
+    id: '/guides/prix-diagnostic-immobilier',
+    path: '/guides/prix-diagnostic-immobilier',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnostiqueurImmobilierVilleRoute =
   DiagnostiqueurImmobilierVilleRouteImport.update({
@@ -92,22 +103,11 @@ const DiagnostiqueurImmobilierVilleRoute =
     path: '/diagnostiqueur-immobilier/$ville',
     getParentRoute: () => rootRouteImport,
   } as any)
-const GuidesIndexRoute = GuidesIndexRouteImport.update({
-  id: '/guides/',
-  path: '/guides/',
-  getParentRoute: () => rootRouteImport,
+const DiagnosticsSlugRoute = DiagnosticsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DiagnosticsRoute,
 } as any)
-const GuidesSlugRoute = GuidesSlugRouteImport.update({
-  id: '/guides/$slug',
-  path: '/guides/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GuidesPrixDiagnosticImmobilierRoute =
-  GuidesPrixDiagnosticImmobilierRouteImport.update({
-    id: '/guides/prix-diagnostic-immobilier',
-    path: '/guides/prix-diagnostic-immobilier',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -238,60 +238,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/a-propos': {
-      id: '/a-propos'
-      path: '/a-propos'
-      fullPath: '/a-propos'
-      preLoaderRoute: typeof AProposRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/devis': {
-      id: '/devis'
-      path: '/devis'
-      fullPath: '/devis'
-      preLoaderRoute: typeof DevisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/diagnostics': {
-      id: '/diagnostics'
-      path: '/diagnostics'
-      fullPath: '/diagnostics'
-      preLoaderRoute: typeof DiagnosticsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/simulateur': {
-      id: '/simulateur'
-      path: '/simulateur'
-      fullPath: '/simulateur'
-      preLoaderRoute: typeof SimulateurRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
+    '/zones': {
+      id: '/zones'
+      path: '/zones'
+      fullPath: '/zones'
+      preLoaderRoute: typeof ZonesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tarifs': {
@@ -301,32 +252,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TarifsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/zones': {
-      id: '/zones'
-      path: '/zones'
-      fullPath: '/zones'
-      preLoaderRoute: typeof ZonesRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/diagnostics/': {
-      id: '/diagnostics/'
+    '/simulateur': {
+      id: '/simulateur'
+      path: '/simulateur'
+      fullPath: '/simulateur'
+      preLoaderRoute: typeof SimulateurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostics': {
+      id: '/diagnostics'
+      path: '/diagnostics'
+      fullPath: '/diagnostics'
+      preLoaderRoute: typeof DiagnosticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devis': {
+      id: '/devis'
+      path: '/devis'
+      fullPath: '/devis'
+      preLoaderRoute: typeof DevisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
       path: '/'
-      fullPath: '/diagnostics/'
-      preLoaderRoute: typeof DiagnosticsIndexRouteImport
-      parentRoute: typeof DiagnosticsRoute
-    }
-    '/diagnostics/$slug': {
-      id: '/diagnostics/$slug'
-      path: '/$slug'
-      fullPath: '/diagnostics/$slug'
-      preLoaderRoute: typeof DiagnosticsSlugRouteImport
-      parentRoute: typeof DiagnosticsRoute
-    }
-    '/diagnostiqueur-immobilier/$ville': {
-      id: '/diagnostiqueur-immobilier/$ville'
-      path: '/diagnostiqueur-immobilier/$ville'
-      fullPath: '/diagnostiqueur-immobilier/$ville'
-      preLoaderRoute: typeof DiagnostiqueurImmobilierVilleRouteImport
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -336,12 +315,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/guides/$slug': {
-      id: '/guides/$slug'
-      path: '/guides/$slug'
-      fullPath: '/guides/$slug'
-      preLoaderRoute: typeof GuidesSlugRouteImport
-      parentRoute: typeof rootRouteImport
+    '/diagnostics/': {
+      id: '/diagnostics/'
+      path: '/'
+      fullPath: '/diagnostics/'
+      preLoaderRoute: typeof DiagnosticsIndexRouteImport
+      parentRoute: typeof DiagnosticsRoute
     }
     '/guides/prix-diagnostic-immobilier': {
       id: '/guides/prix-diagnostic-immobilier'
@@ -349,6 +328,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/guides/prix-diagnostic-immobilier'
       preLoaderRoute: typeof GuidesPrixDiagnosticImmobilierRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostiqueur-immobilier/$ville': {
+      id: '/diagnostiqueur-immobilier/$ville'
+      path: '/diagnostiqueur-immobilier/$ville'
+      fullPath: '/diagnostiqueur-immobilier/$ville'
+      preLoaderRoute: typeof DiagnostiqueurImmobilierVilleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostics/$slug': {
+      id: '/diagnostics/$slug'
+      path: '/$slug'
+      fullPath: '/diagnostics/$slug'
+      preLoaderRoute: typeof DiagnosticsSlugRouteImport
+      parentRoute: typeof DiagnosticsRoute
     }
   }
 }
