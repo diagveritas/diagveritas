@@ -10,13 +10,13 @@ export const Route = createFileRoute("/diagnostics/$slug")({
   loader: ({ params }) => {
     const diag = DIAGNOSTICS.find((d) => d.slug === params.slug);
     if (!diag) throw notFound();
-    return { diag };
+    return { slug: diag.slug };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return { meta: [{ title: "Diagnostic introuvable — DIAG VERITAS" }, { name: "robots", content: "noindex" }] };
     }
-    const { diag } = loaderData;
+    const diag = DIAGNOSTICS.find((d) => d.slug === loaderData.slug)!;
     const faq = DIAGNOSTIC_FAQ[diag.slug] ?? [];
     return {
       meta: [
@@ -97,7 +97,8 @@ function DiagNotFound() {
 }
 
 function DiagnosticDetail() {
-  const { diag } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const diag = DIAGNOSTICS.find((d) => d.slug === slug)!;
   const Icon = diag.icon;
   const others = DIAGNOSTICS.filter((d) => d.slug !== diag.slug);
   const faq = DIAGNOSTIC_FAQ[diag.slug] ?? [];
